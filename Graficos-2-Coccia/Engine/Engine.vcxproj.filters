@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{e08cadee-4417-434a-8270-0e79f54e328a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{c023bd99-df03-411f-a4a7-7229e8f5b970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionManager">
+      <UniqueIdentifier>{147c0e08-fd63-403e-b75e-30190b55c955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{1d352e92-563e-475e-85c2-afc39000e927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity2D">
+      <UniqueIdentifier>{b1a0f9e2-7258-464a-8da4-2c2c5ec65cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Export">
+      <UniqueIdentifier>{426289ed-5423-49a7-933c-38bbb2230d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameBase">
+      <UniqueIdentifier>{dbb0a590-bb9f-4797-8a1f-6d818c8e9354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{8fa9f2f8-e474-4056-8e13-4f5626024691}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{74ac734f-32f9-44cd-bc77-8ecfb568377f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{c9995712-209c-4ad7-8faf-211a9162ec54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shape">
+      <UniqueIdentifier>{d013cba1-0c29-47cf-bec2-fef483eb1f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shape2D">
+      <UniqueIdentifier>{370018a5-75fc-48ac-98ec-9ab514089495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{41c707de-350c-40a0-b22d-52b5efb6b206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureImporter">
+      <UniqueIdentifier>{864eee89-25d7-4a21-8a6a-40317d2d10b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{608fe70b-5f6f-44fc-a152-e242bc16bb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{853dbf4a-5b8f-414a-b251-0ee8240d79db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPCamera">
+      <UniqueIdentifier>{52f596c3-8cc5-400e-b3d8-1d191f9d0a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{a42f1f8e-7f2e-4132-92bf-56d6985ff826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cube">
+      <UniqueIdentifier>{d37eb62f-7053-45d4-bd08-5e8736953289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3D">
+      <UniqueIdentifier>{15949cc6-40db-4af2-8401-246288a3679b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModelImporter">
+      <UniqueIdentifier>{bc312c69-4a6e-435d-b6ac-3a3e72066d4e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation\Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionManager\CollisionManager.cpp">
+      <Filter>CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity\Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Entity2D\Entity2D.cpp">
+      <Filter>Entity2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameBase\GameBase.cpp">
+      <Filter>GameBase</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time\Time.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureImporter\TextureImporter.cpp">
+      <Filter>TextureImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite\Sprite.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shape2D\Shape2D.cpp">
+      <Filter>Shape2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shape\Shape.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader\Shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer\Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FPCamera\FPCamera.cpp">
+      <Filter>FPCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cube\Cube.cpp">
+      <Filter>Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lights\Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cube\Cubo.cpp">
+      <Filter>Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lights\DirectionalLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lights\PointLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lights\Spotlight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Lights\LightsManager.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3D\Mesh.cpp">
+      <Filter>3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\3D\Model.cpp">
+      <Filter>3D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelImporter\ModelImporter.cpp">
+      <Filter>ModelImporter</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Animation\Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CollisionManager\CollisionManager.h">
+      <Filter>CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Entity2D\Entity2D.h">
+      <Filter>Entity2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Export\Export.h">
+      <Filter>Export</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameBase\GameBase.h">
+      <Filter>GameBase</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window\Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Time\Time.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureImporter\stb_image.h">
+      <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureImporter\TextureImporter.h">
+      <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite\Sprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shape2D\Shape2D.h">
+      <Filter>Shape2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shape\Shape.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader\Shader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FPCamera\FPCamera.h">
+      <Filter>FPCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube\Cube.h">
+      <Filter>Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lights\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube\Cubo.h">
+      <Filter>Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lights\DirectionalLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lights\PointLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lights\Spotlight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Lights\LightsManager.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3D\Mesh.h">
+      <Filter>3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\3D\Model.h">
+      <Filter>3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModelImporter\ModelImporter.h">
+      <Filter>ModelImporter</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\Fragment.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="shaders\Vertex.vert">
+      <Filter>Shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>
