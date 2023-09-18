@@ -7,7 +7,7 @@ namespace Engine
 	Game::Game(): GameBase()
 	{
 		_quad = NULL;
-		_player3D = NULL;
+		//_player3D = NULL;
 		_roboBob = NULL;
 		_wall1 = NULL;
 		_wall2 = NULL;
@@ -16,13 +16,13 @@ namespace Engine
 		_light = NULL;
 		//_cube = NULL;
 
-		_cubito = NULL;
+		//_cubito = NULL;
 	}
 
 	Game::~Game()
 	{
-		if (_player3D != NULL)
-			delete _player3D;
+		//if (_player3D != NULL)
+		//	delete _player3D;
 		if (_roboBob != NULL)
 			delete _roboBob;
 		if (_wall1 != NULL)
@@ -35,8 +35,8 @@ namespace Engine
 			delete _camera;
 		if (_light != NULL)
 			delete _light;
-		if (_cubito != NULL)
-			delete _cubito;
+		//if (_cubito != NULL)
+		//	delete _cubito;
 		//if (_cube != NULL)
 		//	delete _cube;
 	}
@@ -104,9 +104,9 @@ namespace Engine
 		
 		// --------------------------------
 		
-		_player3D = new Player3D(10, "res/wall.png","res/container2_specular.png", GetRenderer());
-		_player3D->SetPosition(0, 0, 0);
-		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
+		//_player3D = new Player3D(10, "res/wall.png","res/container2_specular.png", GetRenderer());
+		//_player3D->SetPosition(0, 0, 0);
+		//_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
 		// --------------------------------
 
 		//_box = new Sprite(GetRenderer());
@@ -134,13 +134,14 @@ namespace Engine
 		//_cube->SetPosition(0, 0, 0);
 
 		//_cubito = new Cubo("res/box2.png", "res/container2_specular.png" ,GetRenderer());
-		_cubito = new Cubo("res/box2.png", "res/container2_specular.png",GetRenderer());
 		//_cubito = new Cubo("res/matrix.jpg", "res/matrix.jpg","res/matrix.jpg" ,GetRenderer());
-		_cubito->SetMaterial(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1,1,1), 32);
-		//_cubito->SetScale(1, 1, 1);
-		_cubito->SetPosition(0, 0, 0);
-		_cubito->SetScale(10, 10, 10);
+		
+		//_cubito = new Cubo("res/box2.png", "res/container2_specular.png",GetRenderer());
+		//_cubito->SetMaterial(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1,1,1), 32);
+		//_cubito->SetPosition(0, 0, 0);
+		//_cubito->SetScale(10, 10, 10);
 	}
+		//_cubito->SetScale(1, 1, 1);
 	
 	void Game::Play()
 	{
@@ -164,24 +165,24 @@ namespace Engine
 		//_cube->Draw();
 
 		//_quad->Draw();
-		_light2->SetDirection(_player3D->_transform.forward);
-		//_light2->SetLightData(vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
+		_light2->SetDirection(_model->_transform.forward);
+		//_light2->SetLightData(), vec3(1, 1, 1), vec3(1, 1, 1), vec3(1, 1, 1));
 		//_light->Draw(1);
 		_light2->Draw(1);
 		//_model->Draw();
 		//_model->SetPosition(_player3D->GetPosition());
 		_model->Draw();
 		//_model2->Draw();
-		_cubito->Draw();
+		//_cubito->Draw();
 		if (_camera->GetCurrentMode() != CameraMode::FlyCamera)
 		{
-			_player3D->Move(deltaTime);
+			//_player3D->Move(deltaTime);
 		}
-		_camera->CameraInput(deltaTime,  _player3D->_transform);
+		_camera->CameraInput(deltaTime, _model->_transform);
 
 		if (_camera->GetCurrentMode() != CameraMode::FPCamera)
 		{
-			_player3D->Draw();
+			//_player3D->Draw();
 		}
 		_wall1->Draw();
 		

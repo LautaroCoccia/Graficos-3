@@ -10,7 +10,8 @@ namespace Engine
 	class Game : public GameBase
 	{
 	private:
-		Cubo* _cubito;
+		//Cubo* _cubito;
+		//Cubo* _skybox;
 		Shape* _quad;
 		Player* _bob;
 		Sprite* _wall1;
@@ -18,7 +19,7 @@ namespace Engine
 		Sprite* _box;
 		Camera* _camera;
 		Player* _roboBob;
-		Player3D* _player3D;
+		//Player3D* _player3D;
 		Spotlight* _light;
 		DirectionalLight* _light2;
 		Model* _model;
