@@ -9,35 +9,42 @@ using namespace std;
 using namespace glm;
 namespace Engine
 {
-	void ModelImporter::loadModel(string const& path, bool flipUVs, ModelData& model)
+	Model::ModelData ModelImporter::LoadModel(string const& path, Model::ModelData model)
 	{
-		stbi_set_flip_vertically_on_load(flipUVs);
+		
+		cout << "Load model: Init" << endl;
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals  | aiProcess_CalcTangentSpace);
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
 			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
-			return;
+			return ;
 		}
 		directory = path.substr(0, path.find_last_of('/'));
+		if (scene)
+		{
+			cout << "ProcessNode: init" << endl;
+			ProcessNode(scene->mRootNode, scene,model);
 
-		processNode(scene->mRootNode, scene, model);
+		}
+		cout << "Load model: Succesfull" << endl;
 	}
 
-	void ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
+	void ModelImporter::ProcessNode(aiNode* node, const aiScene* scene, Model::ModelData model)
 	{
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			model.meshes.push_back(processMesh(mesh, scene, model));
+			model._meshes.push_back(ProcessMesh(mesh, scene,model));
 		}
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
 		{
-			processNode(node->mChildren[i], scene, model);
+			ProcessNode(node->mChildren[i], scene,model);
 		}
+		cout << "Process Node: Succesfull" << endl;
 	}
 
-	Mesh ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model)
+	Mesh ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene, Model::ModelData model)
 	{
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
@@ -93,27 +100,24 @@ namespace Engine
 		}
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-		vector<MeshTexture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", model);
+		vector<MeshTexture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse", model);
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
-		vector<MeshTexture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", model);
-		if (specularMaps.empty()) model.hasSpecularMaps = false;
-		else model.hasSpecularMaps = true;
-
+		vector<MeshTexture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular", model);
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
 		// NORMAL USES HEIGHT INSTEAD OF NORMALS
-		vector<MeshTexture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", model);
+		vector<MeshTexture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal", model);
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 
 		// HEIGHT USES AMBIENT INSTEAD OF HEIGHT 
-		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
+		vector<MeshTexture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height",model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
-		return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
+		cout << "Process Mesh: Succesfull" << endl;
+		return Mesh(vertices, indices, textures, _renderer);
 	}
 
-	vector<MeshTexture> ModelImporter::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model)
+	vector<MeshTexture> ModelImporter::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, Model::ModelData model)
 	{
 		vector<MeshTexture> textures;
 		for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -122,11 +126,11 @@ namespace Engine
 			mat->GetTexture(type, i, &str);
 			//cout << str.C_Str() << endl;
 			bool skip = false;
-			for (unsigned int j = 0; j < model.textures_loaded.size(); j++)
+			for (unsigned int j = 0; j < mat->GetTextureCount(type); j++)
 			{
-				if (std::strcmp(model.textures_loaded[j].path.data(), str.C_Str()) == 0)
+				if (std::strcmp(model._textures_loaded[j].path.data(), str.C_Str()) == 0)
 				{
-					textures.push_back(model.textures_loaded[j]);
+					textures.push_back(model._textures_loaded[j]);
 					skip = true;
 					break;
 				}
@@ -135,17 +139,18 @@ namespace Engine
 			{
 
 				MeshTexture texture;
-				texture.id = TextureFromFile(str.C_Str(), directory, false);
+				texture.id = _texImporter->TextureFromFile(str.C_Str(), directory, false);
 				texture.type = typeName;
 				texture.path = str.C_Str();
 				textures.push_back(texture);
-				model.textures_loaded.push_back(texture);
+				model._textures_loaded.push_back(texture);
 			}
+			cout << "Process Texture: Succesfull" << endl;
 		}
 		return textures;
 	}
 
-	unsigned int ModelImporter::TextureFromFile(const char* path, const string& directory, bool gamma)
+	/*unsigned int ModelImporter::TextureFromFile(const char* path, const string& directory, bool gamma)
 	{
 		string filename = string(path);
 		filename = directory + '/' + filename;
@@ -191,6 +196,6 @@ namespace Engine
 			stbi_image_free(data);
 		}
 		return textureID;
-	}
+	}*/
 }
 

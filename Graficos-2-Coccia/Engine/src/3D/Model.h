@@ -16,12 +16,28 @@ namespace Engine
 	class EXPORT_API Model : public Entity
 	{
 	private:
+		ModelImporter* _modImporter= NULL;
 		bool gammaCorrection;
-		std::vector<Mesh> _meshes;
+		
 	public:
-		Model(Renderer* rend, string const& path, bool flipUVs, bool gamma);
+		struct ModelData
+		{
+			int _width = 0;
+			int _height = 0;
+			bool _transparency;
 
+			vector<MeshTexture> _textures_loaded;
+			vector<Mesh> _meshes;
+			string _path;
+
+			const char* _modelTexture;
+			string _directory;
+
+			Renderer* renderer;
+		};
 		ModelData _model;
+		Model(string const& path);
+
 		void MoveModel(glm::vec3 direction);
 		void ScaleModel(float x, float y, float z);
 

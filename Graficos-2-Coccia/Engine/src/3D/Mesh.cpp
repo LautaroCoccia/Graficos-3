@@ -6,12 +6,12 @@ using namespace Engine;
 
 unsigned int _modelUniform;
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer) : Entity()
+Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures,Renderer* renderer) : Entity()
 {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
-	_usesSpecularMaps = usesSpecularMaps;
+	//_usesSpecularMaps = usesSpecularMaps;
 	//_shader = shader;
 	_renderer = renderer;
 

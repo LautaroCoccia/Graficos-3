@@ -4,7 +4,7 @@
 #include "glm\glm.hpp"
 
 #include "..\TextureImporter\stb_image.h"
-#define STB_IMAGE_IMPLEMENTATION
+//#define STB_IMAGE_IMPLEMENTATION
 #include <iostream>
 
 using namespace std;

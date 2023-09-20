@@ -47,7 +47,7 @@ namespace Engine
 
 	public:
 
-		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer);
+		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, Renderer* renderer);
 		~Mesh();
 		void Draw();
 
