@@ -22,15 +22,13 @@ namespace Engine
 		std::vector<Plane*> planes;
 
 	public:
-		BSP(string name, const char* path, vec3 inNormal);
+		BSP();
 		~BSP();
 		void AddModel(Model* newModel);
 		void AddPlane(Plane* plane);
 		void RemoveModel();
 		void CalculateBSP();
 		void CalculateBSPMesh(Mesh* mesh, vec3 cameraPos);
-		float GetDistanceToPoint(glm::vec3 point);
-		bool FrontPlane(glm::vec3 point);
 	};
 }
 #endif

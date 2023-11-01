@@ -64,6 +64,9 @@
     <Filter Include="ModelImporter">
       <UniqueIdentifier>{bc312c69-4a6e-435d-b6ac-3a3e72066d4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BSP">
+      <UniqueIdentifier>{2fd149d5-81d4-4477-b160-c96bb3d32727}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animation\Animation.cpp">
@@ -144,6 +147,10 @@
     <ClCompile Include="src\ModelImporter\ModelImporter.cpp">
       <Filter>ModelImporter</Filter>
     </ClCompile>
+    <ClCompile Include="src\BSP\BSP.cpp">
+      <Filter>BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicalPlane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation\Animation.h">
@@ -230,6 +237,10 @@
     <ClInclude Include="src\ModelImporter\ModelImporter.h">
       <Filter>ModelImporter</Filter>
     </ClInclude>
+    <ClInclude Include="src\BSP\BSP.h">
+      <Filter>BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicalPlane.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Fragment.frag">

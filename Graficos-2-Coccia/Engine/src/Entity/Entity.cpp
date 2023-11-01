@@ -167,7 +167,7 @@ namespace Engine
 	{
 		_isStatic = state;
 	}
-	glm::vec3 Entity::GetPosition()
+	vec3 Entity::GetPosition()
 	{
 		return _transform.position;
 	}

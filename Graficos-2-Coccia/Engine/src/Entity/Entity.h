@@ -5,7 +5,7 @@
 #include "..\Export\Export.h"
 #include "glm\glm\vec3.hpp"
 #include "glm\glm\mat4x4.hpp"
-
+using namespace glm;
 namespace Engine
 {
 	enum class ENTITY_COLOR
@@ -16,43 +16,43 @@ namespace Engine
 
 	struct Transform
 	{
-		glm::vec3 position;
-		glm::vec3 rotation;
-		glm::vec3 scale;
+		vec3 position;
+		vec3 rotation;
+		vec3 scale;
 		
-		glm::vec3 preb_position;
-		glm::vec3 preb_rotation;
-		glm::vec3 preb_scale;
+		vec3 preb_position;
+		vec3 preb_rotation;
+		vec3 preb_scale;
 
-		glm::vec3 forward;
-		glm::vec3 up;
-		glm::vec3 right;
+		vec3 forward;
+		vec3 up;
+		vec3 right;
 	};
 
 	struct GeneralMatrix
 	{
-		glm::mat4 model;
-		glm::mat4 translate;
-		glm::mat4 rotateX;
-		glm::mat4 rotateY;
-		glm::mat4 rotateZ;
-		glm::mat4 scale;
+		mat4 model;
+		mat4 translate;
+		mat4 rotateX;
+		mat4 rotateY;
+		mat4 rotateZ;
+		mat4 scale;
 		
 
 	};
 
 	class EXPORT_API Entity 
 	{
-		void SetPrebPosition(glm::vec3 position);
-		void SetPrebRotation(glm::vec3 rotation);
+		void SetPrebPosition(vec3 position);
+		void SetPrebRotation(vec3 rotation);
 		void SetPrebRotationX(float x);
 		void SetPrebRotationY(float y);
 		void SetPrebRotationZ(float z);
-		void SetPrebScale(glm::vec3 scale);
+		void SetPrebScale(vec3 scale);
 
 	protected:
 		//Renderer* _renderer;
-		glm::mat4 TRS;
+		mat4 TRS;
 		GeneralMatrix _generalMatrix;
 
 		bool _isTrigger;
@@ -85,7 +85,7 @@ namespace Engine
 		void SetTriggerState(bool state);
 		void SetStaticState(bool state);
 		
-		glm::vec3 GetPosition();
+		vec3 GetPosition();
 
 		bool GetTriggerState();
 		bool GetStaticState();
