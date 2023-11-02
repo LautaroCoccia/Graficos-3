@@ -13,6 +13,7 @@ namespace Engine
 		srand(time(0));
 		_window = new Window();
 		_renderer = new Renderer();
+		//_renderer->SetStaticRenderer(_renderer);
 		_collisionManager = new CollisionManager();
 		_camera = new Camera();
 		_lightManager = new LightManager();

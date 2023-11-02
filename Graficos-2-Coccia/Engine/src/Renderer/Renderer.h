@@ -9,6 +9,7 @@
 using namespace glm;
 namespace Engine
 {
+
 	struct LightData
 	{
 		glm::vec3 _color;
@@ -71,9 +72,13 @@ namespace Engine
 		unsigned int _VAO = 0; // VertexArrayObject 
 		unsigned int _EBO = 0; // ElementsBufferObject 
 	public:
+		static Renderer* _staticRenderer;
+
 		Renderer();
 		~Renderer();
-		
+		void SetStaticRenderer(Renderer* renderer);
+		Renderer* GetStaticRenderer();
+
 		int InitGlew();
 		
 		void CreateBuffers();
@@ -117,6 +122,7 @@ namespace Engine
 		void UpdateMVP(glm::mat4 model);
 		unsigned int GetShader();
 		void SetCurrentCamera(Camera* camera);
+		Camera* GetCurrentCamera();
 		void UpdateModelUniform(glm::mat4 modelMatrix, unsigned int shaderId);
 	};
 }

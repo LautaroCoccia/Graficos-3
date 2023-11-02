@@ -9,10 +9,16 @@
 #include "glm/glm/vec2.hpp"
 #include "glm/glm/vec3.hpp"
 #include "glm/glm/mat4x4.hpp"
+#include <array>
+
 using namespace std;
 
 namespace Engine
 {
+	struct BoundingBox {
+		glm::vec3 min;
+		glm::vec3 max;
+	};
 	struct Vertex
 	{
 		glm::vec3 Position;
@@ -37,6 +43,7 @@ namespace Engine
 		unsigned int _normalAttrib;
 		unsigned int _textureAttrib;
 
+		BoundingBox _boundingBox;
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
 		vector<MeshTexture> textures;
@@ -46,11 +53,13 @@ namespace Engine
 		void SetUpMesh();
 
 	public:
-
+		bool canDraw;
 		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer);
 		~Mesh();
 		void Draw();
-
+		BoundingBox CalculateBoundingBox();
+		array<glm::vec3, 8> verticesBoundingBox;
+		array<glm::vec3, 8> CalculateVerticesBoundingBox(BoundingBox bbox);
 		// --------------------------------
 		// Virtual Functions:
 

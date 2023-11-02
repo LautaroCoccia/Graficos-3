@@ -150,7 +150,9 @@
     <ClCompile Include="src\BSP\BSP.cpp">
       <Filter>BSP</Filter>
     </ClCompile>
-    <ClCompile Include="LogicalPlane.cpp" />
+    <ClCompile Include="src\BSP\LogicalPlane.cpp">
+      <Filter>BSP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation\Animation.h">
@@ -240,7 +242,9 @@
     <ClInclude Include="src\BSP\BSP.h">
       <Filter>BSP</Filter>
     </ClInclude>
-    <ClInclude Include="LogicalPlane.h" />
+    <ClInclude Include="src\BSP\LogicalPlane.h">
+      <Filter>BSP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Fragment.frag">

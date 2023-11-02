@@ -6,6 +6,8 @@
 
 namespace Engine
 {
+	Renderer* Renderer::_staticRenderer;
+
 	Renderer::Renderer()
 	{		
 		_shader = new Shader();
@@ -38,7 +40,10 @@ namespace Engine
 		glEnable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
-
+	void Renderer::SetStaticRenderer(Renderer* renderer)
+	{
+		_staticRenderer = renderer;
+	}
 	void Renderer::SetLightVertexArray(unsigned int& vao, unsigned int& vbo)
 	{
 		glGenVertexArrays(1, &vao);
@@ -419,6 +424,10 @@ namespace Engine
 	void Renderer::SetCurrentCamera(Camera* camera)
 	{
 		_camera = camera;
+	}
+	Camera* Renderer::GetCurrentCamera()
+	{
+		return _camera;
 	}
 	void Renderer::UpdateModelUniform(glm::mat4 modelMatrix,unsigned int shaderId)
 	{

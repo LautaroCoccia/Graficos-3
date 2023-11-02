@@ -2,6 +2,7 @@
 #define BSP_H
 #include "../Export/Export.h"
 #include "../3D/Model.h"
+#include "LogicalPlane.h"
 #include "glm/vec3.hpp"
 #include <iostream>
 #include <vector>
@@ -13,19 +14,14 @@ namespace Engine
 	class EXPORT_API BSP
 	{
 	private:
-		struct Plane
-		{
-			vec3 _normal;
-			vec3 _distance;
-		};
 		std::vector<Model*> models;
-		std::vector<Plane*> planes;
+		std::vector<LogicalPlane*> planes;
 
 	public:
 		BSP();
 		~BSP();
 		void AddModel(Model* newModel);
-		void AddPlane(Plane* plane);
+		void AddPlane(LogicalPlane* plane);
 		void RemoveModel();
 		void CalculateBSP();
 		void CalculateBSPMesh(Mesh* mesh, vec3 cameraPos);

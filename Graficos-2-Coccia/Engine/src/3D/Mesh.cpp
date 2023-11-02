@@ -8,13 +8,14 @@ unsigned int _modelUniform;
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer) : Entity()
 {
+	canDraw = true;
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
 	_usesSpecularMaps = usesSpecularMaps;
 	//_shader = shader;
 	_renderer = renderer;
-
+	_boundingBox = CalculateBoundingBox();
 	SetUpMesh();
 }
 
@@ -60,7 +61,8 @@ void Mesh::SetUpMesh()
 
 void Mesh::Draw()
 {
-
+	_boundingBox = CalculateBoundingBox();
+	verticesBoundingBox = CalculateVerticesBoundingBox(_boundingBox);
 	// -------------------------------------
 
 	//_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
@@ -103,7 +105,48 @@ void Mesh::Draw()
 	// always good practice to set everything back to defaults once configured.
 	glActiveTexture(GL_TEXTURE0);
 }
+BoundingBox Mesh::CalculateBoundingBox()
+{
+	BoundingBox bbox;
 
+	if (vertices.empty()) {
+		bbox.min = { 0.0f, 0.0f, 0.0f };
+		bbox.max = { 0.0f, 0.0f, 0.0f };
+		return bbox;
+	}
+
+	bbox.min = vertices[0].Position;
+	bbox.max = vertices[0].Position;
+
+	for (const auto& vertex : vertices) {
+		bbox.min.x = std::min(bbox.min.x, vertex.Position.x);
+		bbox.min.y = std::min(bbox.min.y, vertex.Position.y);
+		bbox.min.z = std::min(bbox.min.z, vertex.Position.z);
+		bbox.max.x = std::max(bbox.max.x, vertex.Position.x);
+		bbox.max.y = std::max(bbox.max.y, vertex.Position.y);
+		bbox.max.z = std::max(bbox.max.z, vertex.Position.z);
+
+	}
+
+	return bbox;
+}
+array<vec3, 8> Mesh::CalculateVerticesBoundingBox(BoundingBox bbox)
+{
+
+	std::array<glm::vec3, 8> boundingBoxVertices = { {
+		{bbox.min.x, bbox.min.y, bbox.min.z}, // Vértice 0
+		{bbox.max.x, bbox.min.y, bbox.min.z}, // Vértice 1
+		{bbox.max.x, bbox.max.y, bbox.min.z}, // Vértice 2
+		{bbox.min.x, bbox.max.y, bbox.min.z}, // Vértice 3
+		{bbox.min.x, bbox.min.y, bbox.max.z}, // Vértice 4
+		{bbox.max.x, bbox.min.y, bbox.max.z}, // Vértice 5
+		{bbox.max.x, bbox.max.y, bbox.max.z}, // Vértice 6
+		{bbox.min.x, bbox.max.y, bbox.max.z}  // Vértice 7
+	} };
+
+
+	return boundingBoxVertices;
+}
 // --------------------------------
 // Virtual Functions:
 
