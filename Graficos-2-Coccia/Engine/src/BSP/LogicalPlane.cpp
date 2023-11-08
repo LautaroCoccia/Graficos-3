@@ -38,5 +38,20 @@ namespace Engine
             return true;
         return false;
     }
+    void LogicalPlane::TriggerCollision(Entity* other)
+    {
+        if (!other->GetStaticState())
+        {
+            glm::vec3 newPos = _transform.position;
+            ReturnToPrevPosition();
+            newPos -= _transform.position;
+
+            other->SetPosition(other->_transform.position + newPos);
+        }
+        else
+        {
+            ReturnToPrevPosition();
+        }
+    }
 
 }

@@ -51,6 +51,16 @@ namespace Engine
 
 		_model = new Model(GetRenderer(),"res/Models/backpack/backpack.obj",false,false);
 		_model->SetPosition(0, 0, 0);
+
+		BSPplanes.push_back(new LogicalPlane("bspPlaneLeft", "assets/red.png", glm::vec3(1, 0, 0)));
+		BSPplanes[0]->SetPosition(-10.0f, 1.0f, 2.0f);
+		BSPplanes[0]->SetScale(0.1f, 15.3f, 60.3f);
+		BSPplanes.push_back(new LogicalPlane("bspPlaneFront", "assets/red.png", glm::vec3(0, 0, 1)));
+		BSPplanes[1]->SetPosition(3.0f, 1.0f, -10.0f);
+		BSPplanes[1]->SetScale(60.3f, 15.3f, 0.1f);
+		BSPplanes.push_back(new LogicalPlane("bspPlaneRight", "assets/red.png", glm::vec3(1, 0, 0)));
+		BSPplanes[2]->SetPosition(10.0f, 1.0f, 2.0f);
+		BSPplanes[2]->SetScale(0.1f, 15.3f, 60.3f);
 		//_model->SetScale(0.25, 0.25, 0.25);
 
 		//_model2 = new Model(GetRenderer(),"res/Models/Skate/characterMedium.fbx", false,false);
@@ -184,7 +194,10 @@ namespace Engine
 			_player3D->Draw();
 		}
 		_wall1->Draw();
-		
+		for (unsigned int i = 0; i < BSPplanes.size(); i++)
+		{
+			BSPplanes[i]->Draw();
+		}
 		//_box->Draw();
 		
 		//GetCollisionManager()->CheckAllCollisions();

@@ -3,7 +3,6 @@
 #include "../Export/Export.h"
 #include "../3D/Model.h"
 #include "LogicalPlane.h"
-#include "glm/vec3.hpp"
 #include <iostream>
 #include <vector>
 using namespace glm;

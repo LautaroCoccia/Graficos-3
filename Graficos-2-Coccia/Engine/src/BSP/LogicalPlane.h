@@ -2,7 +2,6 @@
 #define LOGICALPLANE_H
 #include <iostream>
 #include "../Export/Export.h"
-#include "../glm/glm/vec3.hpp"
 #include "../Entity/Entity.h"	
 using namespace std;
 using namespace glm;
@@ -18,6 +17,7 @@ namespace Engine
 		~LogicalPlane();
 		float GetDistanceToPoint(vec3 point);
 		bool FrontPlane(vec3 point);
+		void TriggerCollision(Entity* other) override;
 	private:
 		vec3 normal;
 		float distance;

@@ -24,6 +24,8 @@ namespace Engine
 		Model* _model;
 		Model* _model2;
 		//Cube* _cube;
+		std::vector<LogicalPlane*> BSPplanes;
+		BSP* bsp;
 
 	public:
 		Game();

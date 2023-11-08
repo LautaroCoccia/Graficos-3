@@ -14,6 +14,8 @@
 #include "../Time/Time.h"
 #include "../CollisionManager/CollisionManager.h"
 #include "../Lights/LightsManager.h"
+#include "../BSP/LogicalPlane.h"
+#include "../BSP/BSP.h"
 #include "glm/glm/glm.hpp"
 namespace Engine
 {
