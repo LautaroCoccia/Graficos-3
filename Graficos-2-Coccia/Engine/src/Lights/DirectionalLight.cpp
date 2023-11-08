@@ -1,7 +1,7 @@
 #include "DirectionalLight.h"
 namespace Engine
 {
-	DirectionalLight::DirectionalLight(Renderer* renderer, glm::vec3 color, glm::vec3 direction) : Light(renderer,color)
+	DirectionalLight::DirectionalLight(glm::vec3 color, glm::vec3 direction) : Light(color)
 	{
 		SetDirection(direction);
 	}

@@ -9,7 +9,7 @@ namespace Engine
 		DirectionLightData _directionData;
 
 	public:
-		DirectionalLight(Renderer* renderer, glm::vec3 color, glm::vec3 direction);
+		DirectionalLight(glm::vec3 color, glm::vec3 direction);
 		~DirectionalLight();
 
 		void Draw(int i) override;

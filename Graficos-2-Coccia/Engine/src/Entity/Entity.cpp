@@ -5,7 +5,7 @@ namespace Engine
 {
 	Entity::Entity(/*Renderer* renderer*/)
 	{
-		//_renderer = renderer;
+		_renderer = _renderer->GetStaticRenderer();
 
 		SetPosition(0, 0, 0);
 		SetRotation(0, 0, 0);

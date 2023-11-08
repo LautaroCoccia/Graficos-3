@@ -3,7 +3,7 @@
 using namespace std;
 namespace Engine
 {
-	Light::Light(Renderer* renderer, glm::vec3 color) 
+	Light::Light( glm::vec3 color) 
 	{
 		_lightData._position = glm::vec3(0, 0, 0);
 
@@ -14,7 +14,7 @@ namespace Engine
 
 		_lightData._specular = { 1.0f, 1.0f, 1.0f };
 
-		_renderer = renderer;
+		_renderer = _renderer->GetStaticRenderer();
 
 	}
 	Light::~Light()

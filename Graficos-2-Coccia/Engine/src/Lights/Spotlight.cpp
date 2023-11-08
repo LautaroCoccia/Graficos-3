@@ -1,7 +1,7 @@
 #include "Spotlight.h"
 namespace Engine
 {
-	Spotlight::Spotlight(Renderer* renderer, glm::vec3 color, glm::vec3 position, glm::vec3 direction) : Light(renderer, color)
+	Spotlight::Spotlight( glm::vec3 color, glm::vec3 position, glm::vec3 direction) : Light(color)
 	{
 		_spotData._position = position;
 		_spotData._direction = direction;

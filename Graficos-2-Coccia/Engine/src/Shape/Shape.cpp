@@ -3,9 +3,9 @@
 using namespace std;
 namespace Engine
 {
-	Shape::Shape(Renderer* renderer) : Entity()
+	Shape::Shape() : Entity()
 	{
-		_renderer = renderer;
+		_renderer = _renderer->GetStaticRenderer();
 	}
 
 	Shape::~Shape()

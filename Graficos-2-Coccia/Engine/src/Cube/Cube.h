@@ -98,7 +98,7 @@ namespace Engine
         unsigned int _vbo; // Vertex Buffer Obj
         unsigned int _ebo; // Index Buffer Obj
     public:
-        Cube(const char* filePath, Renderer* renderer);
+        Cube(const char* filePath);
         Cube();
         Cube(std::string name, const char* filePath);
         // Cube(const char* filePath, Renderer* renderer);

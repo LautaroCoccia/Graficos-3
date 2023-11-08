@@ -37,24 +37,24 @@ namespace Engine
 
 	// ---------
 
-	void LightManager::AddNewDirectional(Renderer* renderer, glm::vec3 color, glm::vec3 direction)
+	void LightManager::AddNewDirectional(glm::vec3 color, glm::vec3 direction)
 	{
-		_directional = new DirectionalLight(renderer, color, direction);
+		_directional = new DirectionalLight(color, direction);
 	}
 
-	void LightManager::AddNewPoint(Renderer* renderer, glm::vec3 color, glm::vec3 position)
+	void LightManager::AddNewPoint(glm::vec3 color, glm::vec3 position)
 	{
 		if (_pointsList.size() < MAX_INDIVIDUALS_LIGHTS)
 		{
-			_pointsList.push_back(new PointLight(renderer, color, position));
+			_pointsList.push_back(new PointLight(color, position));
 		}
 	}
 
-	void LightManager::AddNewSpot(Renderer* renderer, glm::vec3 color, glm::vec3 position, glm::vec3 direction)
+	void LightManager::AddNewSpot( glm::vec3 color, glm::vec3 position, glm::vec3 direction)
 	{
 		if (_spotsList.size() < MAX_INDIVIDUALS_LIGHTS)
 		{
-			_spotsList.push_back(new Spotlight(renderer, color, position, direction));
+			_spotsList.push_back(new Spotlight(color, position, direction));
 		}
 	}
 

@@ -54,7 +54,7 @@ namespace Engine
 
 	public:
 		bool canDraw;
-		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer);
+		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps);
 		~Mesh();
 		void Draw();
 		BoundingBox CalculateBoundingBox();

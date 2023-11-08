@@ -19,7 +19,7 @@ namespace Engine
 		bool gammaCorrection;
 		std::vector<Mesh> _meshes;
 	public:
-		Model(Renderer* rend, string const& path, bool flipUVs, bool gamma);
+		Model( string const& path, bool flipUVs, bool gamma);
 
 		ModelData _model;
 		void MoveModel(glm::vec3 direction);

@@ -72,9 +72,9 @@ namespace Engine
         unsigned int _ebo; // Index Buffer Obj
     public:
         Cubo(std::string name, const char* filePath);
-        Cubo(const char* diffuse, Renderer* renderer);
-        Cubo(const char* diffuse, const char* specular, Renderer* renderer);
-        Cubo(const char* diffuse, const char* specular, const char* emission, Renderer* renderer);
+        Cubo(const char* diffuse);
+        Cubo(const char* diffuse, const char* specular);
+        Cubo(const char* diffuse, const char* specular, const char* emission);
         void SetEmission(const char* emmision);
         void SetMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess);
         void Draw();

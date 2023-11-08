@@ -3,7 +3,6 @@
 
 #include "..\Export\Export.h"
 #include "..\Entity\Entity.h"
-#include "..\Renderer\Renderer.h"
 #include "..\Animation\Animation.h"
 #include "..\TextureImporter\TextureImporter.h"
 
@@ -60,10 +59,9 @@ namespace Engine
 		Animation* _animation; // Acá se podria poner una lista para asi tener mas de 1 animacion
 		TextureImporter _textureImporter;
 		//TextureData _textureData;
-		Renderer* _renderer;
 	public:
-		Sprite(Renderer* renderer, const char* name);
-		Sprite(Renderer* renderer, const glm::ivec2& tileDimensions);
+		Sprite(const char* name);
+		Sprite(const glm::ivec2& tileDimensions);
 		~Sprite();
 
 		void InitTexture();

@@ -92,7 +92,7 @@ namespace Engine
 
 	Renderer* GameBase::GetRenderer()
 	{
-		return _renderer;
+		return _renderer->GetStaticRenderer();
 	}
 	CollisionManager* GameBase::GetCollisionManager()
 	{

@@ -11,7 +11,7 @@ namespace Engine
 		SpotlightData _spotData;
 
 	public:
-		Spotlight(Renderer* renderer,glm::vec3 color, glm::vec3 position, glm::vec3 direction);
+		Spotlight(glm::vec3 color, glm::vec3 position, glm::vec3 direction);
 		~Spotlight();
 
 		void Draw(int i) override;

@@ -2,7 +2,7 @@
 #include <iostream>
 namespace Engine
 {
-	Player::Player(Renderer* renderer, const glm::ivec2& tileDimensions, float speed, Camera* camera) : Sprite(renderer, tileDimensions)
+	Player::Player(Renderer* renderer, const glm::ivec2& tileDimensions, float speed, Camera* camera) : Sprite( tileDimensions)
 	{
 		_speed = speed;
 		//_camera = camera;

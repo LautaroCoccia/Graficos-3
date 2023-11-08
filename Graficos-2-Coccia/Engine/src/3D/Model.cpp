@@ -3,9 +3,9 @@
 namespace Engine
 {
 
-	Model::Model(Renderer* rend, string const& path, bool flipUVs, bool gamma) : gammaCorrection(gamma)
+	Model::Model( string const& path, bool flipUVs, bool gamma) : gammaCorrection(gamma)
 	{
-		_model.renderer = rend;
+		_model.renderer = _model.renderer->GetStaticRenderer();
 
 		ModelImporter::loadModel(path, flipUVs, _model);
 	}

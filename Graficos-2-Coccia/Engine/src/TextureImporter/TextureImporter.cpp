@@ -23,6 +23,7 @@ namespace Engine
 
 	TextureData TextureImporter::ImportTexture(const char* filePath)
 	{
+
 		TextureData textureData;
 		textureData._path = filePath;
 		stbi_set_flip_vertically_on_load(1);
@@ -52,8 +53,9 @@ namespace Engine
 		stbi_image_free(textureData._data);
 		return textureData;
 	}
-	void TextureImporter::ImportTexture(Renderer* renderer, const char* name, unsigned int& texture)
+	void TextureImporter::ImportTexture( const char* name, unsigned int& texture)
 	{
+		//_renderer = _renderer->GetStaticRenderer();
 		stbi_set_flip_vertically_on_load(true);
 
 		_data = stbi_load(name, &_width, &_height, &_nrChannels, 0);
@@ -88,10 +90,10 @@ namespace Engine
 
 		stbi_image_free(_data);
 		
-		glUseProgram(renderer->GetShader());
+		//glUseProgram(_renderer->GetShader());
 		//glUniform1i(glGetUniformLocation(renderer->GetShader(), "ourTexture"), 0);
 	}
-	void TextureImporter::ImportTexture(Renderer* renderer, const char* filePath, TextureData& textureData)
+	void TextureImporter::ImportTexture( const char* filePath, TextureData& textureData)
 	{
 	
 		stbi_set_flip_vertically_on_load(true);

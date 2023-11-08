@@ -49,7 +49,7 @@ namespace Engine
 		_camera = new Camera(CameraType::Perspective, 0.1f, 100.0f, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
-		_model = new Model(GetRenderer(),"res/Models/backpack/backpack.obj",false,false);
+		_model = new Model("res/Models/backpack/backpack.obj",false,false);
 		_model->SetPosition(0, 0, 0);
 
 		BSPplanes.push_back(new LogicalPlane("bspPlaneLeft", "res/RockWall.jpg", glm::vec3(1, 0, 0)));
@@ -66,12 +66,12 @@ namespace Engine
 		//_model2 = new Model(GetRenderer(),"res/Models/Skate/characterMedium.fbx", false,false);
 		//_model2->SetPosition(0, 1, 0);
 
-		_light = new Spotlight(GetRenderer(),vec3(1,1,1),vec3(1,1,0 ),vec3(1,1,1));
+		_light = new Spotlight(vec3(1,1,1),vec3(1,1,0 ),vec3(1,1,1));
 		_light->SetPosition(glm::vec3(0, 1, 0));
 		_light->SetLightData(glm::vec3(1, 1, 1), glm::vec3(0.5, 0.5, 0.5), glm::vec3(0.5, 0.5, 0.5), vec3(1,0,0));
 		_light->SetCutOffs(5, 10);
 
-		_light2 = new DirectionalLight(GetRenderer(), vec3(1, 0, 0), vec3(1, 0, 0));
+		_light2 = new DirectionalLight(vec3(1, 0, 0), vec3(1, 0, 0));
 		//For TPCamera (pos y rot)
 		_camera->SetCameraPosition(0, 0, -3);
 		_camera->SetCameraRotation(4.37f, 1, 0);
@@ -82,10 +82,10 @@ namespace Engine
 		
 		GetRenderer()->SetCurrentCamera(_camera);
 
-		GetLightManager()->AddNewPoint(GetRenderer(), glm::vec3(1, 1, 1), glm::vec3(5, 1, 5));
-		GetLightManager()->AddNewPoint(GetRenderer(), glm::vec3(1, 1, 1), glm::vec3(2, 1, -2));
+		GetLightManager()->AddNewPoint( glm::vec3(1, 1, 1), glm::vec3(5, 1, 5));
+		GetLightManager()->AddNewPoint( glm::vec3(1, 1, 1), glm::vec3(2, 1, -2));
 
-		GetLightManager()->AddNewSpot(GetRenderer(), glm::vec3(1, 1, 1), _camera->GetPosition(), _camera->_transform.forward);
+		GetLightManager()->AddNewSpot( glm::vec3(1, 1, 1), _camera->GetPosition(), _camera->_transform.forward);
 		GetLightManager()->GetSpot(0)->SetSpotValues(0.01f, 0.3f, 0.1f);
 		//_quad = new Shape(GetRenderer());
 		//_quad->InitShape(TypeOfShape::Quad);
@@ -93,7 +93,7 @@ namespace Engine
 		//_quad->SetPosition(0, 1, 0);
 		// --------------------------------
 		
-		_wall1 = new Sprite(GetRenderer(), "res/RockWall.jpg");
+		_wall1 = new Sprite( "res/RockWall.jpg");
 
 		//_wall1->InitTexture();
 		//_wall1->ImportTexture("res/RockWall.jpg");
@@ -114,7 +114,7 @@ namespace Engine
 		
 		// --------------------------------
 		
-		_player3D = new Player3D(10, "res/wall.png","res/container2_specular.png", GetRenderer());
+		_player3D = new Player3D(10, "res/wall.png","res/container2_specular.png" );
 		_player3D->SetPosition(0, 0, 0);
 		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
 		// --------------------------------
@@ -144,7 +144,7 @@ namespace Engine
 		//_cube->SetPosition(0, 0, 0);
 
 		//_cubito = new Cubo("res/box2.png", "res/container2_specular.png" ,GetRenderer());
-		_cubito = new Cubo("res/box2.png", "res/container2_specular.png",GetRenderer());
+		_cubito = new Cubo("res/box2.png", "res/container2_specular.png");
 		//_cubito = new Cubo("res/matrix.jpg", "res/matrix.jpg","res/matrix.jpg" ,GetRenderer());
 		_cubito->SetMaterial(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1,1,1), 32);
 		//_cubito->SetScale(1, 1, 1);

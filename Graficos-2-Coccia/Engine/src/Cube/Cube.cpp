@@ -3,9 +3,9 @@
 using namespace std;
 namespace Engine
 {
-	Cube::Cube(const char* filePath, Renderer* renderer) : Entity()
+	Cube::Cube(const char* filePath) : Entity()
 	{
-		_renderer = renderer;
+		_renderer = _renderer->GetStaticRenderer();
 
 		//TI.ImportTexture(_renderer, filePath, _diffuse);
 		if (_data._nrChannels == 4)

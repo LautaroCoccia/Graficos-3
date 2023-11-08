@@ -5,6 +5,7 @@
 #include "..\Export\Export.h"
 #include "glm\glm\vec3.hpp"
 #include "glm\glm\mat4x4.hpp"
+#include "../Renderer/Renderer.h"
 using namespace glm;
 namespace Engine
 {
@@ -51,12 +52,12 @@ namespace Engine
 		void SetPrebScale(vec3 scale);
 
 	protected:
-		//Renderer* _renderer;
 		mat4 TRS;
 		GeneralMatrix _generalMatrix;
 
 		bool _isTrigger;
 		bool _isStatic;
+		Renderer* _renderer;
 
 	public:
 		Entity();

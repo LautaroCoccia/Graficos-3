@@ -11,7 +11,7 @@ namespace Engine
 		PointLightData _pointData;
 
 	public:
-		PointLight(Renderer* renderer, glm::vec3 color, glm::vec3 position);
+		PointLight(glm::vec3 color, glm::vec3 position);
 		~PointLight();
 
 		void Draw(int isActive) override;

@@ -6,7 +6,7 @@ using namespace Engine;
 
 unsigned int _modelUniform;
 
-Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps, Renderer* renderer) : Entity()
+Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps) : Entity()
 {
 	canDraw = true;
 	this->vertices = vertices;
@@ -14,7 +14,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTex
 	this->textures = textures;
 	_usesSpecularMaps = usesSpecularMaps;
 	//_shader = shader;
-	_renderer = renderer;
+	_renderer = _renderer->GetStaticRenderer();
 	_boundingBox = CalculateBoundingBox();
 	SetUpMesh();
 }

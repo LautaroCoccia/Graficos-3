@@ -19,7 +19,7 @@ namespace Engine
 		LightData _lightData;
 		Renderer* _renderer;
 	public:
-		Light(Renderer* renderer, glm::vec3 color);
+		Light(glm::vec3 color);
 		~Light();
 		void SetLightData(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, glm::vec3 lightColor);
 		void SetPosition(glm::vec3 position);

@@ -63,9 +63,9 @@ namespace Engine
         _material._ambient = glm::vec3(1.0, 1.0, 1.0);
         _material._shininess = 32;
     }
-	Cubo::Cubo(const char* filePath, Renderer* renderer) : Entity()
+	Cubo::Cubo(const char* filePath) : Entity()
 	{
-		_renderer = renderer;
+		_renderer = _renderer->GetStaticRenderer();
 
 		//TI.ImportTexture(_renderer, filePath, _);
 
@@ -87,15 +87,15 @@ namespace Engine
 
       
 	}
-    Cubo::Cubo(const char* diffuse, const char* specular, Renderer* renderer) : Entity()
+    Cubo::Cubo(const char* diffuse, const char* specular) : Entity()
     {
-        _renderer = renderer;
+        _renderer = _renderer->GetStaticRenderer();
 
-        TI.ImportTexture(_renderer, diffuse, _diffuseMap);
+        TI.ImportTexture( diffuse, _diffuseMap);
         if(specular != NULL)
-            TI.ImportTexture(_renderer, specular, _specularMap);
+            TI.ImportTexture(specular, _specularMap);
         else 
-            TI.ImportTexture(_renderer, diffuse, _specularMap);
+            TI.ImportTexture(diffuse, _specularMap);
         
         _vertexSize = sizeof(_vertices);
 
@@ -118,20 +118,20 @@ namespace Engine
         //_material._specular = glm::vec3(0.1, 0.1f, 0.1f);
         //_material._shininess = 32;
     }
-    Cubo::Cubo(const char* diffuse, const char* specular, const char* emission, Renderer* renderer) : Entity()
+    Cubo::Cubo(const char* diffuse, const char* specular, const char* emission) : Entity()
     {
-        _renderer = renderer;
+        _renderer = _renderer->GetStaticRenderer();
 
-        TI.ImportTexture(_renderer, diffuse, _diffuseMap);
+        TI.ImportTexture( diffuse, _diffuseMap);
         if (specular != NULL)
         {
-            TI.ImportTexture(_renderer, specular, _specularMap);
+            TI.ImportTexture(specular, _specularMap);
         }
         else
         {
-            TI.ImportTexture(_renderer, diffuse, _specularMap);
+            TI.ImportTexture(diffuse, _specularMap);
         }
-        TI.ImportTexture(_renderer, emission, _emissionMap);
+        TI.ImportTexture(emission, _emissionMap);
         
 
         _vertexSize = sizeof(_vertices);
@@ -147,7 +147,7 @@ namespace Engine
     }
     void Cubo::SetEmission(const char* emmision)
     {
-        TI.ImportTexture(_renderer, emmision, _emissionMap);
+        TI.ImportTexture( emmision, _emissionMap);
         _vertexSize = sizeof(_vertices);
 
         _renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);

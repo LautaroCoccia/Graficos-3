@@ -24,9 +24,9 @@ namespace Engine
 		LightManager();
 		~LightManager();
 
-		void AddNewDirectional(Renderer* renderer, glm::vec3 color, glm::vec3 direction);
-		void AddNewPoint(Renderer* renderer,glm::vec3 color, glm::vec3 position);
-		void AddNewSpot(Renderer* renderer, glm::vec3 color, glm::vec3 position, glm::vec3 direction);
+		void AddNewDirectional(glm::vec3 color, glm::vec3 direction);
+		void AddNewPoint(glm::vec3 color, glm::vec3 position);
+		void AddNewSpot(glm::vec3 color, glm::vec3 position, glm::vec3 direction);
 
 		void RemoveDirectional();
 		void RemovePoint(int i);

@@ -2,14 +2,14 @@
 
 namespace Engine
 {	
-	Sprite::Sprite(Renderer* renderer, const char* name) : Entity()
+	Sprite::Sprite(const char* name) : Entity()
 	{
-		_renderer = renderer;
+		//_renderer = _renderer->GetStaticRenderer();
 		//_textureImporter = new TextureImporter();
 
 		//_animation = new Animation();
-		_textureImporter.ImportTexture(_renderer, name,_diffuse);
-		_textureImporter.ImportTexture(_renderer, name,_specular);
+		_textureImporter.ImportTexture(name,_diffuse);
+		_textureImporter.ImportTexture(name,_specular);
 		_vertexSize = sizeof(_vertex);
 
 		_renderer->SetVertexBuffer(_vertexSize, _vertex, _vao, _vbo);
@@ -18,9 +18,9 @@ namespace Engine
 		_renderer->BindTexture2(_diffuse,_specular);
 	}
 
-	Sprite::Sprite(Renderer* renderer, const glm::ivec2& tileDimensions) : Entity()
+	Sprite::Sprite(const glm::ivec2& tileDimensions) : Entity()
 	{
-		_renderer = renderer;
+		//_renderer = _renderer->GetStaticRenderer();
 
 		_animation = new Animation();
 		_animation->InitSpriteSheet(this, tileDimensions);

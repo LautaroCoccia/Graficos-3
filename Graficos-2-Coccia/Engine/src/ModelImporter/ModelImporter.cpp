@@ -110,7 +110,7 @@ namespace Engine
 		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
-		return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
+		return Mesh(vertices, indices, textures, model.hasSpecularMaps);
 	}
 
 	vector<MeshTexture> ModelImporter::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model)

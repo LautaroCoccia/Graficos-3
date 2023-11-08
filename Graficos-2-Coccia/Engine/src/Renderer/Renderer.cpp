@@ -9,7 +9,7 @@ namespace Engine
 	Renderer* Renderer::_staticRenderer;
 
 	Renderer::Renderer()
-	{		
+	{	
 		_shader = new Shader();
 		_camera  = new Camera();
 	}

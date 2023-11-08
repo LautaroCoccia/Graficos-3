@@ -17,11 +17,11 @@ namespace Engine
 
 
 	}
-	Player3D::Player3D(float movementSpeed, const char* texture, const char* texture2, Renderer* renderer) : Entity()
+	Player3D::Player3D(float movementSpeed, const char* texture, const char* texture2) : Entity()
 	{
-		_dLight = new Spotlight(renderer, glm::vec3(1,1,1), _transform.position,_transform.forward);
+		_dLight = new Spotlight( glm::vec3(1,1,1), _transform.position,_transform.forward);
 		_movementSpeed = movementSpeed;
-		SetCubeModel(texture, texture2, renderer);
+		SetCubeModel(texture, texture2 );
 		_transform.position = vec3(0, 0, 0);
 
 		_transform.rotation.x = 4.37114e-08f;
@@ -38,9 +38,9 @@ namespace Engine
 		if (_cubeModel != NULL)
 			delete _cubeModel;
 	}
-	void Player3D::SetCubeModel(const char* diffuseMap, const char* specularMap , Renderer* renderer)
+	void Player3D::SetCubeModel(const char* diffuseMap, const char* specularMap)
 	{
-		_cubeModel = new Cubo(diffuseMap, specularMap , renderer);
+		_cubeModel = new Cubo(diffuseMap, specularMap );
 		_cubeModel->SetMaterial(glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), glm::vec3(1, 1, 1), 32);
 
 		_cubeModel->SetPosition(_transform.position);

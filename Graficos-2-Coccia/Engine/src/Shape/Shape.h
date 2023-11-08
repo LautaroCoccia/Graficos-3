@@ -45,7 +45,7 @@ namespace Engine
 		Renderer* _renderer;
 
 	public:
-		Shape(Renderer* renderer);
+		Shape();
 		~Shape();
 		void InitShape(TypeOfShape type);
 		void Draw();

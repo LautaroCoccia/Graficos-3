@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	PointLight::PointLight(Renderer* renderer,glm::vec3 color, glm::vec3 position) : Light(renderer, color)
+	PointLight::PointLight(glm::vec3 color, glm::vec3 position) : Light( color)
 	{
 		_pointData._position = position;
 
