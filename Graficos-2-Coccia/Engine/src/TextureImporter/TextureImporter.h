@@ -8,6 +8,7 @@ namespace Engine
 {
 	struct TextureData
 	{
+		std::string _path;
 		unsigned char* _data;
 		int _width;
 		int _height;
@@ -25,7 +26,7 @@ namespace Engine
 		
 		TextureImporter();
 		~TextureImporter();
-
+		TextureData ImportTexture(const char* filePath);
 		void ImportTexture(Renderer* renderer, const char* name, unsigned int& texture);
 		void ImportTexture(Renderer* renderer, const char* filePath, TextureData& _textureData);
 		unsigned int TextureFromFile(const char* path, std::string const& directory, bool gamma = false);

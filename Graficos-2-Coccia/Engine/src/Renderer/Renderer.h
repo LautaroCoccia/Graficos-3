@@ -49,6 +49,7 @@ namespace Engine
 	};
 	struct Material
 	{
+		glm::vec3 _color;
 		glm::vec3 _ambient;
 		glm::vec3 _diffuse;
 		glm::vec3 _specular;

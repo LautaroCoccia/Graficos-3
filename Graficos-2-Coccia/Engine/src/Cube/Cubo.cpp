@@ -51,6 +51,18 @@ namespace Engine
         20, 21, 23,
         21, 22, 23
     };
+ 
+    Cubo::Cubo(std::string name, const char* filePath) : Entity()
+    {
+        _data = TI.ImportTexture(filePath);
+        if (_data._nrChannels == 4)
+            _alpha = true;
+
+        _material._color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+        _material._diffuse = glm::vec3(1.0, 1.0, 1.0);
+        _material._ambient = glm::vec3(1.0, 1.0, 1.0);
+        _material._shininess = 32;
+    }
 	Cubo::Cubo(const char* filePath, Renderer* renderer) : Entity()
 	{
 		_renderer = renderer;
@@ -73,10 +85,7 @@ namespace Engine
 		//material.shininess = 1;
 		//material.specular = glm::vec3(1.0, 1.0, 1.0);
 
-        _material._ambient = glm::vec3(1.0, 1.0, 1.0);
-        _material._diffuse = glm::vec3(1, 1, 1);
-        _material._specular = glm::vec3(0.1, 0.1f, 0.1f);
-        _material._shininess = 32;
+      
 	}
     Cubo::Cubo(const char* diffuse, const char* specular, Renderer* renderer) : Entity()
     {

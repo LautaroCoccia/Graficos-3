@@ -2,13 +2,13 @@
 
 namespace Engine
 {
-    LogicalPlane::LogicalPlane() :Entity()
+    LogicalPlane::LogicalPlane() : Cube()
     {
 
         normal = vec3(0,0,0);
         distance = 1;
     }
-    LogicalPlane::LogicalPlane(string name, const char* path, vec3 inNormal) : Entity()//completar
+    LogicalPlane::LogicalPlane(string name, const char* path, vec3 inNormal) : Cube(name, path)//completar
     {
         normal = inNormal;
         distance = -dot(normal, GetPosition());
@@ -38,7 +38,7 @@ namespace Engine
             return true;
         return false;
     }
-    void LogicalPlane::TriggerCollision(Entity* other)
+    /*void LogicalPlane::TriggerCollision(Entity* other)
     {
         if (!other->GetStaticState())
         {
@@ -52,6 +52,6 @@ namespace Engine
         {
             ReturnToPrevPosition();
         }
-    }
+    }*/
 
 }

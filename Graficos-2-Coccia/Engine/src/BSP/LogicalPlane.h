@@ -2,14 +2,14 @@
 #define LOGICALPLANE_H
 #include <iostream>
 #include "../Export/Export.h"
-#include "../Entity/Entity.h"	
+#include "../Cube/Cube.h"
 using namespace std;
 using namespace glm;
 //#include "cube/Cube.h"
 namespace Engine
 {
 
-	class EXPORT_API LogicalPlane : public Entity
+	class EXPORT_API LogicalPlane : public Cube
 	{
 	public:
 		LogicalPlane();
@@ -17,7 +17,7 @@ namespace Engine
 		~LogicalPlane();
 		float GetDistanceToPoint(vec3 point);
 		bool FrontPlane(vec3 point);
-		void TriggerCollision(Entity* other) override;
+		//void TriggerCollision(Entity* other) override;
 	private:
 		vec3 normal;
 		float distance;

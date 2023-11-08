@@ -21,6 +21,37 @@ namespace Engine
 	
 	}
 
+	TextureData TextureImporter::ImportTexture(const char* filePath)
+	{
+		TextureData textureData;
+		textureData._path = filePath;
+		stbi_set_flip_vertically_on_load(1);
+		glGenTextures(1, &textureData._diffuse);
+		glBindTexture(GL_TEXTURE_2D, textureData._diffuse);
+		// set texture wrapping to GL_REPEAT (default wrapping method)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		// set texture filtering parameters
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		textureData._data = stbi_load(filePath, &textureData._width, &textureData._height, &textureData._nrChannels, STBI_rgb_alpha);
+		if (textureData._data)
+		{
+			if (textureData._nrChannels != 4)
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, textureData._width, textureData._height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData._data);
+			else
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, textureData._width, textureData._height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData._data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+		}
+		else
+		{
+			std::cout << "Failed to import texture: pixel data null: " << textureData._path << std::endl;
+		}
+
+		stbi_image_free(textureData._data);
+		return textureData;
+	}
 	void TextureImporter::ImportTexture(Renderer* renderer, const char* name, unsigned int& texture)
 	{
 		stbi_set_flip_vertically_on_load(true);
@@ -56,7 +87,7 @@ namespace Engine
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		stbi_image_free(_data);
-
+		
 		glUseProgram(renderer->GetShader());
 		//glUniform1i(glGetUniformLocation(renderer->GetShader(), "ourTexture"), 0);
 	}

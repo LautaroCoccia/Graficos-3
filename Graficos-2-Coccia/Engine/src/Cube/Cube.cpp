@@ -31,6 +31,23 @@ namespace Engine
 			cube[i]->SetRotation(facesRotations[i]);
 		}*/
 	}
+	Cube::Cube() : Entity()
+	{
+		_data._width = 0;
+		_data._height = 0;
+		_data._nrChannels = 0;
+		_data._diffuse = 0;
+	}
+	Cube::Cube(std::string name, const char* filePath) : Entity()
+	{
+		_data = TI.ImportTexture(filePath);
+		if (_data._nrChannels == 4)
+			_alpha = true;
+
+		//_material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+		//_material.ambient = glm::vec3(1.0, 1.0, 1.0);
+		//_material.shininess = 32;
+	}
 	Cube::~Cube()
 	{
 		_renderer->DeleteBuffers(_vao, _vbo, _ebo);

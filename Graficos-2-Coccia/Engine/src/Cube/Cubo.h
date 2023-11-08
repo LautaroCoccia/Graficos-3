@@ -58,7 +58,7 @@ namespace Engine
             21, 22, 23
         };
         TextureImporter TI;
-       // TextureData _data;
+        TextureData _data;
         bool _alpha = false;
         Renderer* _renderer;
         Material _material;
@@ -71,6 +71,7 @@ namespace Engine
         unsigned int _vbo; // Vertex Buffer Obj
         unsigned int _ebo; // Index Buffer Obj
     public:
+        Cubo(std::string name, const char* filePath);
         Cubo(const char* diffuse, Renderer* renderer);
         Cubo(const char* diffuse, const char* specular, Renderer* renderer);
         Cubo(const char* diffuse, const char* specular, const char* emission, Renderer* renderer);
