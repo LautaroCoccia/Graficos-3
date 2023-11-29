@@ -40,10 +40,21 @@ namespace Engine
 	}
 	Cube::Cube(std::string name, const char* filePath) : Entity()
 	{
-		_data = TI.ImportTexture(filePath);
-		if (_data._nrChannels == 4)
-			_alpha = true;
+		TI.ImportTexture(filePath, _diffuseMap);
+		//if (specular != NULL)
+		//	TI.ImportTexture(specular, _specularMap);
+		//else
+			TI.ImportTexture(filePath, _specularMap);
 
+		_vertexSize = sizeof(_vertices);
+
+		_renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
+		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
+
+		_renderer->SetCubeVertexAttribPointer(_modelUniform);
+		_renderer->BindTexture2(_diffuseMap, _specularMap);
+
+		_renderer->SetVertexAttribPointer(false, _modelUniform);
 		//_material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
 		//_material.ambient = glm::vec3(1.0, 1.0, 1.0);
 		//_material.shininess = 32;
@@ -56,6 +67,18 @@ namespace Engine
 		//	if (cube[i] != NULL)
 		//		delete cube[i];
 		//}
+	}
+	void Cube::SetMaterial(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, float shininess)
+	{
+		_material._ambient = ambient;
+		_material._diffuse = diffuse;
+		_material._specular = specular;
+		_material._shininess = shininess;
+
+		_renderer->UpdateMaterial(_material);
+		//glm::vec3 ambient = glm::vec3(1, 1, 1);
+		//glm::vec3 diffuse = glm::vec3(0.1, 0.5f, 0.31f);
+		//glm::vec3 specular = glm::vec3(0.5f, 0.5f, 0.5f);
 	}
 	void Cube::UpdatePosition()
 	{
@@ -74,13 +97,21 @@ namespace Engine
 		//_textureImporter->BindTexture(_textureData._texture);
 
 		
-		_renderer->BindTexture(_data._diffuse);
 		//_renderer->SetCubeVertexAttribPointer(_modelUniform);
+
+		_renderer->BindTexture2(_diffuseMap, _specularMap);
+		_renderer->UpdateMaterial(_material);
+		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+		_renderer->Draw(_alpha, _vao, _vbo, _ebo, _vertices, _vertexSize, sizeof(_index) / sizeof(float));
+
+		_renderer->DisableTexture();
+
+		/*_renderer->BindTexture(_data._diffuse);
 
 		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 		_renderer->Draw(_alpha,_vao, _vbo, _ebo, _vertices, _vertexSize, sizeof(_index) / sizeof(float));
 		
-		_renderer->DisableTexture();
+		_renderer->DisableTexture();*/
 	}
 	void Cube::TriggerCollision(Entity* other)
 	{

@@ -53,14 +53,22 @@ namespace Engine
 		_model->SetPosition(0, 0, 0);
 
 		BSPplanes.push_back(new LogicalPlane("bspPlaneLeft", "res/RockWall.jpg", glm::vec3(1, 0, 0)));
+		BSPplanes[0]->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
 		BSPplanes[0]->SetPosition(-10.0f, 1.0f, 2.0f);
 		BSPplanes[0]->SetScale(0.1f, 15.3f, 60.3f);
 		BSPplanes.push_back(new LogicalPlane("bspPlaneFront", "res/RockWall.jpg", glm::vec3(0, 0, 1)));
+		BSPplanes[1]->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
 		BSPplanes[1]->SetPosition(3.0f, 1.0f, -10.0f);
 		BSPplanes[1]->SetScale(60.3f, 15.3f, 0.1f);
 		BSPplanes.push_back(new LogicalPlane("bspPlaneRight", "res/RockWall.jpg", glm::vec3(1, 0, 0)));
+		BSPplanes[2]->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
 		BSPplanes[2]->SetPosition(10.0f, 1.0f, 2.0f);
 		BSPplanes[2]->SetScale(0.1f, 15.3f, 60.3f);
+
+		_cubeTest = new Cube("bspPlaneLeft", "res/RockWall.jpg");
+		_cubeTest->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
+		_cubeTest->SetPosition(-10.0f, 1.0f, 2.0f);
+		_cubeTest->SetScale(0.1f, 15.3f, 60.3f);
 		//_model->SetScale(0.25, 0.25, 0.25);
 
 		//_model2 = new Model(GetRenderer(),"res/Models/Skate/characterMedium.fbx", false,false);
@@ -196,9 +204,14 @@ namespace Engine
 		_wall1->Draw();
 		if (Input::GetKey(Keycode::SPACE))
 		{
+			//_cubeTest->Draw();
 			for (unsigned int i = 0; i < BSPplanes.size(); i++)
 			{
-				BSPplanes[i]->Draw();
+				if (BSPplanes[i] != NULL)
+				{
+					cout << "Estoy vivo" << endl;
+					BSPplanes[i]->Draw();
+				}
 			}
 		}
 		//_box->Draw();

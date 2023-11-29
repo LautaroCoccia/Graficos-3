@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    LogicalPlane::LogicalPlane() : Cube()
+    LogicalPlane::LogicalPlane() : Cube("non",NULL)
     {
 
         normal = vec3(0,0,0);
