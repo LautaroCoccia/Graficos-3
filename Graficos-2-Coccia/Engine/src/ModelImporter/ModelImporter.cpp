@@ -9,6 +9,7 @@ using namespace std;
 using namespace glm;
 namespace Engine
 {
+std::vector<Mesh*> ModelImporter::parents;
 	void ModelImporter::loadModel(string const& path, bool flipUVs, ModelData& model)
 	{
 		stbi_set_flip_vertically_on_load(flipUVs);
@@ -21,22 +22,41 @@ namespace Engine
 		}
 		directory = path.substr(0, path.find_last_of('/'));
 
-		processNode(scene->mRootNode, scene, model);
+		Mesh* aux = processNode(scene->mRootNode, scene, model);
+		model.parentMesh = aux;
 	}
 
-	void ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
+	Mesh* ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
 	{
 		Mesh* aux;
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 			aux = processMesh(mesh, scene, model);
-			model.meshes.push_back(processMesh(mesh, scene, model));
+			aux->SetNode(node);
+			//model.meshes.push_back(processMesh(mesh, scene, model));
+			for (int i = 0; i < parents.size(); i++)
+				if (aux->GetNode()->mParent == parents[i]->GetNode())
+				{
+					aux->SetParent(parents[i]);
+					parents[i]->AddMeshSon(aux);
+					break;
+				}
+
+			if (node->mNumChildren > 0)
+				if (!aux->isParent)
+				{
+					aux->isParent = true;
+					parents.push_back(aux);
+				}
 		}
-		for (unsigned int i = 0; i < node->mNumChildren; i++)
+		model.meshes.push_back(aux);
+		for (size_t i = 0; i < node->mNumChildren; i++)
 		{
 			processNode(node->mChildren[i], scene, model);
 		}
+
+		return aux;
 	}
 
 	Mesh* ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model)

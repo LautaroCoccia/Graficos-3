@@ -26,7 +26,8 @@ namespace Engine
 	{
 		
 	private:
-		static void processNode(aiNode* node, const aiScene* scene, ModelData& model);
+		static std::vector<Mesh*> parents;
+		static Mesh* processNode(aiNode* node, const aiScene* scene, ModelData& model);
 		static Mesh* processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model);
 		static vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model);
 

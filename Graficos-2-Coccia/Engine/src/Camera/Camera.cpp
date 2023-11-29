@@ -60,7 +60,6 @@ namespace Engine
 		switch (type)
 		{
 		case CameraType::Perspective:
-			_projection = glm::perspective(glm::radians(45.0f), height / width, near, far);
 			_yaw = -90.f;
 			_pitch = 0.0f;
 			_lastX = width / 2;
@@ -69,6 +68,25 @@ namespace Engine
 			_firstMouse = true;
 
 			_sensitivity = sensibility;
+
+			_transform.rotation.x = 0;
+			_transform.rotation.y = 0;
+			_transform.rotation.z = 0;
+
+			_transform.position = glm::vec3(0.0f, 0.0f, 3.0f);
+
+
+			_transform.up = glm::vec3(0.0f, 1.0f, 0.0f);
+			_transform.right = glm::cross(_transform.up, _transform.rotation);
+
+
+			_transform.up = glm::cross(_transform.rotation, _transform.right);
+
+			_transform.forward = glm::vec3(0.0f, 0.0f, 1.0f);
+
+			_projection = glm::perspective(glm::radians(45.0f), height / width, near, far);
+			_view = glm::lookAt(_transform.position, _transform.position, _transform.up);
+			_view = glm::mat4(1.0f);
 			break;
 
 		case CameraType::Ortho:

@@ -96,15 +96,15 @@ namespace Engine
         else 
             TI.ImportTexture(diffuse, _specularMap);
         
-        _vertexSize = sizeof(_vertices);
-
-        _renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
-        _renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
-
-        _renderer->SetCubeVertexAttribPointer(_modelUniform);
-        _renderer->BindTexture2(_diffuseMap, _specularMap);
-
-        _renderer->SetVertexAttribPointer(false, _modelUniform);
+        //_vertexSize = sizeof(_vertices);
+        //
+        //_renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
+        //_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
+        //
+        //_renderer->SetCubeVertexAttribPointer(_modelUniform);
+        //_renderer->BindTexture2(_diffuseMap, _specularMap);
+        //
+        //_renderer->SetVertexAttribPointer(false, _modelUniform);
 
         //material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
         //material.ambient = glm::vec3(1.0, 1.0, 1.0);

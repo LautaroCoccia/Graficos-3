@@ -46,7 +46,7 @@ namespace Engine
 		//else
 			TI.ImportTexture(filePath, _specularMap);
 
-		_vertexSize = sizeof(_vertices);
+		/*_vertexSize = sizeof(_vertices);
 
 		_renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
 		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
@@ -54,10 +54,10 @@ namespace Engine
 		_renderer->SetCubeVertexAttribPointer(_modelUniform);
 		_renderer->BindTexture2(_diffuseMap, _specularMap);
 
-		_renderer->SetVertexAttribPointer(false, _modelUniform);
-		//_material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
-		//_material.ambient = glm::vec3(1.0, 1.0, 1.0);
-		//_material.shininess = 32;
+		_renderer->SetVertexAttribPointer(false, _modelUniform);*/
+		_material._color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+		_material._ambient = glm::vec3(1.0, 1.0, 1.0);
+		_material._shininess = 32;
 	}
 	Cube::~Cube()
 	{

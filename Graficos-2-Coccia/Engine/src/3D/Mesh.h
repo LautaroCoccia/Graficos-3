@@ -13,6 +13,7 @@
 #include <array>
 
 using namespace std;
+struct aiNode;
 
 namespace Engine
 {
@@ -49,6 +50,7 @@ namespace Engine
 		vector<unsigned int> indices;
 		vector<MeshTexture> textures;
 		Mesh* parent;
+		aiNode* myself;
 
 		bool _usesSpecularMaps;
 		Renderer* _renderer;
@@ -58,9 +60,18 @@ namespace Engine
 	public:
 		vector<Mesh*> children;
 		bool canDraw;
+		bool isParent;
+
 		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps);
 		~Mesh();
 		void Draw();
+		
+		void SetNode(aiNode* _myself);
+		aiNode* GetNode();
+		void SetParent(Mesh* _parent);
+		Mesh* GetParent();
+		void AddMeshSon(Mesh* newChildren);
+
 		BoundingBox CalculateBoundingBox();
 		array<glm::vec3, 8> verticesBoundingBox;
 		array<glm::vec3, 8> CalculateVerticesBoundingBox(BoundingBox bbox);

@@ -16,6 +16,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTex
 	//_shader = shader;
 	_renderer = _renderer->_staticRenderer;
 	_boundingBox = CalculateBoundingBox();
+	verticesBoundingBox = CalculateVerticesBoundingBox(_boundingBox);
 	SetUpMesh();
 }
 
@@ -67,44 +68,74 @@ void Mesh::Draw()
 
 	//_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
 	//_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
-	glUniform1i(glGetUniformLocation(_renderer->GetShader(), "model"), 0);
-
-	// bind appropriate textures
-	unsigned int diffuseNr = 1;
-	unsigned int specularNr = 1;
-	unsigned int normalNr = 1;
-	unsigned int heightNr = 1;
-
-
-	for (unsigned int i = 0; i < textures.size(); i++)
+	if (canDraw)
 	{
-		glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
-		// retrieve texture number (the N in diffuse_textureN)
-		string number;
-		string name = textures[i].type;
-		if (name == "diffuse")
-			number = std::to_string(diffuseNr++);
-		else if (name == "specular")
-			number = std::to_string(specularNr++); // transfer unsigned int to string
-		else if (name == "normal")
-			number = std::to_string(normalNr++); // transfer unsigned int to string
-		else if (name == "height")
-			number = std::to_string(heightNr++); // transfer unsigned int to string
+		glUniform1i(glGetUniformLocation(_renderer->GetShader(), "model"), 0);
 
-		// now set the sampler to the correct texture unit
-		glUniform1i(glGetUniformLocation(_renderer->GetShader(), (name + number).c_str()), i);
-		// and finally bind the texture
-		glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		// bind appropriate textures
+		unsigned int diffuseNr = 1;
+		unsigned int specularNr = 1;
+		unsigned int normalNr = 1;
+		unsigned int heightNr = 1;
+
+
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i); // active proper texture unit before binding
+			// retrieve texture number (the N in diffuse_textureN)
+			string number;
+			string name = textures[i].type;
+			if (name == "diffuse")
+				number = std::to_string(diffuseNr++);
+			else if (name == "specular")
+				number = std::to_string(specularNr++); // transfer unsigned int to string
+			else if (name == "normal")
+				number = std::to_string(normalNr++); // transfer unsigned int to string
+			else if (name == "height")
+				number = std::to_string(heightNr++); // transfer unsigned int to string
+
+			// now set the sampler to the correct texture unit
+			glUniform1i(glGetUniformLocation(_renderer->GetShader(), (name + number).c_str()), i);
+			// and finally bind the texture
+			glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		}
+		_renderer->UpdateModelUniform(_generalMatrix.model, _renderer->GetShader());
+		// draw mesh
+		glBindVertexArray(_vao);
+		glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+		// always good practice to set everything back to defaults once configured.
+		glActiveTexture(GL_TEXTURE0);
 	}
-	_renderer->UpdateModelUniform(_generalMatrix.model,_renderer->GetShader());
-	// draw mesh
-	glBindVertexArray(_vao);
-	glDrawElements(GL_TRIANGLES, static_cast<unsigned int>(indices.size()), GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-
-	// always good practice to set everything back to defaults once configured.
-	glActiveTexture(GL_TEXTURE0);
+	
 }
+
+void Mesh::SetNode(aiNode* _myself)
+{
+	myself = _myself;
+}
+
+aiNode* Mesh::GetNode()
+{
+	return myself;
+}
+
+void Mesh::SetParent(Mesh* _parent)
+{
+	parent = _parent;
+}
+
+Mesh* Mesh::GetParent()
+{
+	return parent;
+}
+
+void Mesh::AddMeshSon(Mesh* newChildren)
+{
+	children.push_back(newChildren);
+}
+
 BoundingBox Mesh::CalculateBoundingBox()
 {
 	BoundingBox bbox;

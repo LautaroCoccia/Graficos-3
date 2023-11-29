@@ -46,7 +46,8 @@ namespace Engine
 		StartEngine(1200, 600, "Coccia Graficos 2");
 		srand(time(NULL));
 
-		_camera = new Camera(CameraType::Perspective, 0.1f, 100.0f, 1200, 600, 0.5f);
+		_camera = new Camera(CameraType::Perspective, 0.001f, 100.0f, 1200, 600, 0.5f);
+		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 75, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
 		_model = new Model("res/Models/backpack/backpack.obj",false,false);
@@ -129,6 +130,9 @@ namespace Engine
 		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
 		bsp = new BSP();
 		bsp->AddModel(_model);
+		bsp->AddPlane(BSPplanes[0]);
+		//bsp->AddPlane(BSPplanes[1]);
+		//bsp->AddPlane(BSPplanes[2]);
 
 		// --------------------------------
 
@@ -172,6 +176,7 @@ namespace Engine
 
 	void Game::Update(float deltaTime)
 	{
+		bsp->CalculateBSP();
 		if (Input::GetKey(Keycode::ALPHA1))
 		{
 			glm::vec3 algo =(_model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime);
@@ -195,7 +200,7 @@ namespace Engine
 		//_model->SetPosition(_player3D->GetPosition());
 		_model->Draw();
 		//_model2->Draw();
-		_cubito->Draw();
+		//_cubito->Draw();
 		if (_camera->GetCurrentMode() != CameraMode::FlyCamera)
 		{
 			_player3D->Move(deltaTime);
@@ -206,7 +211,7 @@ namespace Engine
 		{
 			_player3D->Draw();
 		}
-		_wall1->Draw();
+		//_wall1->Draw();
 		if (Input::GetKey(Keycode::SPACE))
 		{
 			//_cubeTest->Draw();
@@ -215,7 +220,7 @@ namespace Engine
 				if (BSPplanes[i] != NULL)
 				{
 					cout << "Estoy vivo" << endl;
-					BSPplanes[i]->Draw();
+					BSPplanes[0]->Draw();
 				}
 			}
 		}
