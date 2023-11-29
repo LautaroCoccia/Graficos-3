@@ -75,7 +75,7 @@ namespace Engine
 
 		
 		_renderer->BindTexture(_data._diffuse);
-		_renderer->SetCubeVertexAttribPointer(_modelUniform);
+		//_renderer->SetCubeVertexAttribPointer(_modelUniform);
 
 		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
 		_renderer->Draw(_alpha,_vao, _vbo, _ebo, _vertices, _vertexSize, sizeof(_index) / sizeof(float));

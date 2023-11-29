@@ -194,9 +194,12 @@ namespace Engine
 			_player3D->Draw();
 		}
 		_wall1->Draw();
-		for (unsigned int i = 0; i < BSPplanes.size(); i++)
+		if (Input::GetKey(Keycode::SPACE))
 		{
-			//BSPplanes[i]->Draw();
+			for (unsigned int i = 0; i < BSPplanes.size(); i++)
+			{
+				BSPplanes[i]->Draw();
+			}
 		}
 		//_box->Draw();
 		
