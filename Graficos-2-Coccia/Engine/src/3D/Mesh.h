@@ -5,6 +5,7 @@
 #include <string>
 
 #include "../Export/Export.h"
+#include "../Entity/Entity.h"
 #include "../Renderer/Renderer.h"
 #include "glm/glm/vec2.hpp"
 #include "glm/glm/vec3.hpp"

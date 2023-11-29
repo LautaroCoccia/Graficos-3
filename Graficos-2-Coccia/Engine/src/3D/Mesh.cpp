@@ -14,7 +14,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTex
 	this->textures = textures;
 	_usesSpecularMaps = usesSpecularMaps;
 	//_shader = shader;
-	_renderer = _renderer->GetStaticRenderer();
+	_renderer = _renderer->_staticRenderer;
 	_boundingBox = CalculateBoundingBox();
 	SetUpMesh();
 }

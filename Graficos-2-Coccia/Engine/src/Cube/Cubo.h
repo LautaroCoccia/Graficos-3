@@ -1,6 +1,7 @@
 #ifndef CUBO_H
 #define CUBO_H
 #include "..\Export\Export.h"
+#include "..\Entity\Entity.h"
 #include "../TextureImporter/TextureImporter.h"
 
 namespace Engine
@@ -60,7 +61,6 @@ namespace Engine
         TextureImporter TI;
         TextureData _data;
         bool _alpha = false;
-        Renderer* _renderer;
         Material _material;
         int _vertexSize;
         unsigned int _modelUniform;

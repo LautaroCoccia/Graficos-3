@@ -67,6 +67,9 @@
     <Filter Include="BSP">
       <UniqueIdentifier>{2fd149d5-81d4-4477-b160-c96bb3d32727}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Transform">
+      <UniqueIdentifier>{9b557b7a-f48b-46d9-a9ef-fbcf32ae1e54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Animation\Animation.cpp">
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="src\BSP\LogicalPlane.cpp">
       <Filter>BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transform\Transform.cpp">
+      <Filter>Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="src\BSP\LogicalPlane.h">
       <Filter>BSP</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform\Transform.h">
+      <Filter>Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

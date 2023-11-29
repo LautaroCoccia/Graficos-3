@@ -44,6 +44,7 @@ namespace Engine
 	{
 		_staticRenderer = renderer;
 	}
+	
 	void Renderer::SetLightVertexArray(unsigned int& vao, unsigned int& vbo)
 	{
 		glGenVertexArrays(1, &vao);

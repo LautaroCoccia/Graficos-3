@@ -3,7 +3,7 @@
 
 #include <string>
 #include "..\Export\Export.h"
-#include "..\Entity\Entity.h"
+#include "..\Transform\Transform.h"
 #include "glm\glm\mat4x4.hpp"
 #include "..\Shader\Shader.h"
 #include "..\Window\Window.h"
@@ -20,7 +20,7 @@ namespace Engine
 		TPCamera,
 		StaticCamera
 	};
-	class EXPORT_API Camera : public Entity
+	class EXPORT_API Camera : public Transform
 	{
 	private:
 		
@@ -64,14 +64,14 @@ namespace Engine
 		void SetCameraDirection(float x, float y, float z);
 		void SetCameraMode(CameraMode mode);
 		void DefaultSettings();
-		void CameraInput(float deltaTime, Transform& transformObj);
+		void CameraInput(float deltaTime, Transforms& transformObj);
 		static void MouseCallback(GLFWwindow* window, double xpos, double ypos);
 		glm::mat4 GetView();
 		glm::mat4 GetProjection();
 		glm::vec3 GetRotation();
 		CameraMode GetCurrentMode();
 
-		void TriggerCollision(Entity* other);
+		//void TriggerCollision(Entity* other);
 	};
 }
 #endif

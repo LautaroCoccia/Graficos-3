@@ -5,7 +5,7 @@ namespace Engine
 {
 	Shape::Shape() : Entity()
 	{
-		_renderer = _renderer->GetStaticRenderer();
+		_renderer = _renderer->_staticRenderer;
 	}
 
 	Shape::~Shape()

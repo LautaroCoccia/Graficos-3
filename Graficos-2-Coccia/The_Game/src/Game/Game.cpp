@@ -196,7 +196,7 @@ namespace Engine
 		_wall1->Draw();
 		for (unsigned int i = 0; i < BSPplanes.size(); i++)
 		{
-			BSPplanes[i]->Draw();
+			//BSPplanes[i]->Draw();
 		}
 		//_box->Draw();
 		

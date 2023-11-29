@@ -19,12 +19,12 @@ namespace Engine
 	float camX;
 	float camZ;
 
-	Camera::Camera() : Entity()
+	Camera::Camera() : Transform()
 	{
 		DefaultSettings();
 	}
 
-	Camera::Camera(CameraType type, float near, float far, float height, float width, float sensibility) : Entity()
+	Camera::Camera(CameraType type, float near, float far, float height, float width, float sensibility) : Transform()
 	{
 		DefaultSettings();
 		//SetCameraValues(type, near, far, height, width);
@@ -184,7 +184,7 @@ namespace Engine
 			_pitch = -89.0f;
 		
 	}
-	void Camera::CameraInput(float deltaTime, Transform& transformObj)
+	void Camera::CameraInput(float deltaTime, Transforms& transformObj)
 	{
 
 		glfwSetInputMode(Input::GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -301,6 +301,6 @@ namespace Engine
 	{
 		return _currentMode;
 	}
-	void Camera::TriggerCollision(Entity* other){ }
+	//void Camera::TriggerCollision(Entity* other){ }
 
 }

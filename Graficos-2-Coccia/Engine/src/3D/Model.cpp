@@ -5,7 +5,7 @@ namespace Engine
 
 	Model::Model( string const& path, bool flipUVs, bool gamma) : gammaCorrection(gamma)
 	{
-		_model.renderer = _model.renderer->GetStaticRenderer();
+		_model.renderer = _model.renderer->_staticRenderer;
 
 		ModelImporter::loadModel(path, flipUVs, _model);
 	}

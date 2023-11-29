@@ -78,7 +78,7 @@ namespace Engine
 		Renderer();
 		~Renderer();
 		void SetStaticRenderer(Renderer* renderer);
-		Renderer* GetStaticRenderer();
+		//Renderer* GetStaticRenderer();
 
 		int InitGlew();
 		

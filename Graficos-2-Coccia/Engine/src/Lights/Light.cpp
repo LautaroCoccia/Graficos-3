@@ -14,7 +14,7 @@ namespace Engine
 
 		_lightData._specular = { 1.0f, 1.0f, 1.0f };
 
-		_renderer = _renderer->GetStaticRenderer();
+		_renderer = _renderer->_staticRenderer;
 
 	}
 	Light::~Light()

@@ -65,7 +65,6 @@ namespace Engine
     }
 	Cubo::Cubo(const char* filePath) : Entity()
 	{
-		_renderer = _renderer->GetStaticRenderer();
 
 		//TI.ImportTexture(_renderer, filePath, _);
 
@@ -89,7 +88,7 @@ namespace Engine
 	}
     Cubo::Cubo(const char* diffuse, const char* specular) : Entity()
     {
-        _renderer = _renderer->GetStaticRenderer();
+        _renderer = _renderer->_staticRenderer;
 
         TI.ImportTexture( diffuse, _diffuseMap);
         if(specular != NULL)
@@ -120,7 +119,7 @@ namespace Engine
     }
     Cubo::Cubo(const char* diffuse, const char* specular, const char* emission) : Entity()
     {
-        _renderer = _renderer->GetStaticRenderer();
+        _renderer = _renderer->_staticRenderer;
 
         TI.ImportTexture( diffuse, _diffuseMap);
         if (specular != NULL)

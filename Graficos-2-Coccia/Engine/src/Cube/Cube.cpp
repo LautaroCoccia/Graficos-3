@@ -5,7 +5,7 @@ namespace Engine
 {
 	Cube::Cube(const char* filePath) : Entity()
 	{
-		_renderer = _renderer->GetStaticRenderer();
+		_renderer = _renderer->_staticRenderer;
 
 		//TI.ImportTexture(_renderer, filePath, _diffuse);
 		if (_data._nrChannels == 4)
