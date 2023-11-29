@@ -26,8 +26,8 @@ namespace Engine
 
 	Camera::Camera(CameraType type, float near, float far, float height, float width, float sensibility) : Transform()
 	{
-		DefaultSettings();
-		//SetCameraValues(type, near, far, height, width);
+		//DefaultSettings();
+		SetCameraValues(type, near, far, height, width, sensibility);
 	}
 
 	Camera::~Camera()
@@ -69,6 +69,22 @@ namespace Engine
 			_firstMouse = true;
 
 			_sensitivity = sensibility;
+
+			_transform.rotation.x = 0;
+			_transform.rotation.y = 0;
+			_transform.rotation.z = 0;
+
+			_transform.up = glm::vec3(0.0f, 1.0f, 0.0f);
+			_transform.right = glm::cross(_transform.up, _transform.rotation);
+
+
+			_transform.up = glm::cross(_transform.rotation, _transform.right);
+
+			_transform.forward = glm::vec3(0.0f, 0.0f, 1.0f);
+
+			//_projection = glm::perspective(glm::radians(45.0f), 1200.0f / 600.0f, 0.1f, 100.0f);
+			_view = glm::lookAt(_transform.position, _transform.position, _transform.up);
+			_view = glm::mat4(1.0f);
 			break;
 
 		case CameraType::Ortho:

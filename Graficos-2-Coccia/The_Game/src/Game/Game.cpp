@@ -46,7 +46,8 @@ namespace Engine
 		StartEngine(1200, 600, "Coccia Graficos 2");
 		srand(time(NULL));
 
-		_camera = new Camera(CameraType::Perspective, 0.1f, 100.0f, 1200, 600, 0.5f);
+		_camera = new Camera(CameraType::Perspective, 0.001f, 25, 1200, 600, 0.5f);
+		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 50, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
 		_model = new Model("res/Models/backpack/backpack.obj",false,false);
@@ -129,7 +130,7 @@ namespace Engine
 		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
 		bsp = new BSP();
 		bsp->AddModel(_model);
-
+		bsp->AddPlane(BSPplanes[0]);
 		// --------------------------------
 
 		//_box = new Sprite(GetRenderer());
@@ -172,11 +173,22 @@ namespace Engine
 
 	void Game::Update(float deltaTime)
 	{
+		bsp->CalculateBSP();
 		if (Input::GetKey(Keycode::ALPHA1))
 		{
 			glm::vec3 algo =(_model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime);
 			_model->ScaleModel(algo.x, algo.y, algo.z);
 		}
+		if (Input::GetKey(Keycode::ALPHA9))
+		{
+			_model->SetPosition(_model->_transform.position.x -= (10 * deltaTime), _model->_transform.position.y, _model->_transform.position.z);
+
+		}
+		else if (Input::GetKey(Keycode::ALPHA8))
+		{
+			_model->SetPosition(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z);
+		}
+
 		//_model->ScaleModel(0,0,0);
 		//_camera->SetCameraPosition(_roboBob->_transform.position);
 		//_roboBob->Move(deltaTime);
@@ -195,7 +207,7 @@ namespace Engine
 		//_model->SetPosition(_player3D->GetPosition());
 		_model->Draw();
 		//_model2->Draw();
-		_cubito->Draw();
+		//_cubito->Draw();
 		if (_camera->GetCurrentMode() != CameraMode::FlyCamera)
 		{
 			_player3D->Move(deltaTime);
@@ -215,7 +227,7 @@ namespace Engine
 				if (BSPplanes[i] != NULL)
 				{
 					cout << "Estoy vivo" << endl;
-					BSPplanes[i]->Draw();
+					BSPplanes[0]->Draw();
 				}
 			}
 		}
