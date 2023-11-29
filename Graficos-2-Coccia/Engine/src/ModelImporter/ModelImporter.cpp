@@ -26,9 +26,11 @@ namespace Engine
 
 	void ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
 	{
+		Mesh* aux;
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+			aux = processMesh(mesh, scene, model);
 			model.meshes.push_back(processMesh(mesh, scene, model));
 		}
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
@@ -37,7 +39,7 @@ namespace Engine
 		}
 	}
 
-	Mesh ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model)
+	Mesh* ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model)
 	{
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
@@ -110,7 +112,8 @@ namespace Engine
 		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
-		return Mesh(vertices, indices, textures, model.hasSpecularMaps);
+
+		return new Mesh(vertices, indices, textures, model.hasSpecularMaps);
 	}
 
 	vector<MeshTexture> ModelImporter::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model)

@@ -48,12 +48,15 @@ namespace Engine
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
 		vector<MeshTexture> textures;
+		Mesh* parent;
+
 		bool _usesSpecularMaps;
 		Renderer* _renderer;
 
 		void SetUpMesh();
 
 	public:
+		vector<Mesh*> children;
 		bool canDraw;
 		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps);
 		~Mesh();

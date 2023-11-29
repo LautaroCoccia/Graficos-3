@@ -3,7 +3,7 @@
 namespace Engine
 {
 
-	Model::Model( string const& path, bool flipUVs, bool gamma) : gammaCorrection(gamma)
+	Model::Model( string const& path, bool flipUVs, bool gamma) 
 	{
 		_model.renderer = _model.renderer->_staticRenderer;
 
@@ -14,7 +14,7 @@ namespace Engine
 	{
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
-			_model.meshes[i].SetPosition(direction.x, direction.y, direction.z);
+			_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
 		}
 	}
 
@@ -26,7 +26,7 @@ namespace Engine
 			{
 				x = 0; y = 0; z = 0;
 			}
-			_model.meshes[i].SetScale(x, y, z);
+			_model.meshes[i]->SetScale(x, y, z);
 		}
 	}
 
@@ -35,7 +35,7 @@ namespace Engine
 		_model.renderer->UpdateProgram(TRS);
 		for (unsigned int i = 0; i < _model.meshes.size(); i++)
 		{
-			_model.meshes[i].Draw();
+			_model.meshes[i]->Draw();
 		}
 	}
 	void Model::TriggerCollision(Entity* other) { }

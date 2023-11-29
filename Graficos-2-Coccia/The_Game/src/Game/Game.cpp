@@ -69,6 +69,8 @@ namespace Engine
 		_cubeTest->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
 		_cubeTest->SetPosition(-10.0f, 1.0f, 2.0f);
 		_cubeTest->SetScale(0.1f, 15.3f, 60.3f);
+
+		
 		//_model->SetScale(0.25, 0.25, 0.25);
 
 		//_model2 = new Model(GetRenderer(),"res/Models/Skate/characterMedium.fbx", false,false);
@@ -125,6 +127,9 @@ namespace Engine
 		_player3D = new Player3D(10, "res/wall.png","res/container2_specular.png" );
 		_player3D->SetPosition(0, 0, 0);
 		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
+		bsp = new BSP();
+		bsp->AddModel(_model);
+
 		// --------------------------------
 
 		//_box = new Sprite(GetRenderer());

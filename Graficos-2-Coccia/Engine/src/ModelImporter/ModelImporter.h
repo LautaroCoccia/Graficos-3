@@ -15,8 +15,8 @@ namespace Engine
 	struct ModelData
 	{
 		vector <MeshTexture> textures_loaded;
-		vector<Mesh> meshes;
-
+		vector<Mesh*> meshes;
+		Mesh* parentMesh;
 		bool hasSpecularMaps;
 
 		Renderer* renderer;
@@ -24,9 +24,10 @@ namespace Engine
 
 	class EXPORT_API ModelImporter
 	{
+		
 	private:
 		static void processNode(aiNode* node, const aiScene* scene, ModelData& model);
-		static Mesh processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model);
+		static Mesh* processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model);
 		static vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model);
 
 		static unsigned int TextureFromFile(const char* path, const string& directory, bool gamma);

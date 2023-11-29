@@ -17,7 +17,7 @@ namespace Engine
 	{
 	private:
 		bool gammaCorrection;
-		std::vector<Mesh> _meshes;
+		//std::vector<Mesh> _meshes;
 	public:
 		Model( string const& path, bool flipUVs, bool gamma);
 
