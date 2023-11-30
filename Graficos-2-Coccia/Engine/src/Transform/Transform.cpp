@@ -1,12 +1,13 @@
 #include "Transform.h"
 #include "glm/gtc/matrix_transform.hpp"
-
+#include <iostream>
+using namespace std;
 
 namespace Engine
 {
 	Transform::Transform()
 	{
-
+		
 	}
 	Transform::~Transform()
 	{
@@ -22,6 +23,7 @@ namespace Engine
 
 		_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
 		UpdateMatrix();
+		std::cout << "position: " << _transform.position.x << " " << _transform.position.y << " " << _transform.position.z << endl;
 	}
 
 	void Transform::SetPosition(glm::vec3 position)
@@ -110,12 +112,8 @@ namespace Engine
 
 	void Transform::UpdateMatrix()
 	{
-		_generalMatrix.model =
-			_generalMatrix.translate *
-			_generalMatrix.rotateX *
-			_generalMatrix.rotateY *
-			_generalMatrix.rotateZ *
-			_generalMatrix.scale;
+		_generalMatrix.model =_generalMatrix.translate *_generalMatrix.rotateX * _generalMatrix.rotateY *
+			_generalMatrix.rotateZ * _generalMatrix.scale;
 	}
 
 	void Transform::ReturnToPrevTransform()

@@ -13,7 +13,7 @@ namespace Engine
 	{
 		stbi_set_flip_vertically_on_load(flipUVs);
 		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals  | aiProcess_CalcTangentSpace);
+		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
 			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
@@ -72,12 +72,12 @@ namespace Engine
 				vector.x = mesh->mTangents[i].x;
 				vector.y = mesh->mTangents[i].y;
 				vector.z = mesh->mTangents[i].z;
-				//vertex.Tangent = vector;
+				vertex.Tangent = vector;
 
 				vector.x = mesh->mBitangents[i].x;
 				vector.y = mesh->mBitangents[i].y;
 				vector.z = mesh->mBitangents[i].z;
-				//vertex.Bitangent = vector;
+				vertex.Bitangent = vector;
 			}
 			else
 			{
@@ -123,7 +123,7 @@ namespace Engine
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);
-			//cout << str.C_Str() << endl;
+			cout << str.C_Str() << endl;
 			bool skip = false;
 			for (unsigned int j = 0; j < model.textures_loaded.size(); j++)
 			{

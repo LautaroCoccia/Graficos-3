@@ -63,7 +63,7 @@ namespace Engine
         bool _alpha = false;
         Material _material;
         int _vertexSize;
-        unsigned int _modelUniform;
+        //unsigned int _modelUniform;
         unsigned int _diffuseMap;
         unsigned int _specularMap;
         unsigned int _emissionMap;

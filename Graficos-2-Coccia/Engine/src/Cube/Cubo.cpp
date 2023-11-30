@@ -73,7 +73,7 @@ namespace Engine
 		_renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
 		_renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 		
-		_renderer->SetCubeVertexAttribPointer(_modelUniform);
+		_renderer->SetCubeVertexAttribPointer(_generalMatrix.modelUniform);
         //_renderer->BindTexture(_data._diffuse);
 
 		//_renderer->SetVertexAttribPointer(false, _modelUniform);
@@ -101,10 +101,10 @@ namespace Engine
         _renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
         _renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 
-        _renderer->SetCubeVertexAttribPointer(_modelUniform);
+        _renderer->SetCubeVertexAttribPointer(_generalMatrix.modelUniform);
         _renderer->BindTexture2(_diffuseMap, _specularMap);
 
-        _renderer->SetVertexAttribPointer(false, _modelUniform);
+        _renderer->SetVertexAttribPointer(false, _generalMatrix.modelUniform);
 
         //material.color = glm::vec4(1.0, 1.0, 1.0, 1.0);
         //material.ambient = glm::vec3(1.0, 1.0, 1.0);
@@ -138,11 +138,11 @@ namespace Engine
         _renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
         _renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 
-        _renderer->SetCubeVertexAttribPointer(_modelUniform);
+        _renderer->SetCubeVertexAttribPointer(_generalMatrix.modelUniform);
         //_renderer->BindTexture2(_diffuseMap, _specularMap);
         _renderer->BindTexture3(_diffuseMap, _specularMap, _emissionMap);
 
-        _renderer->SetVertexAttribPointer(false, _modelUniform);
+        _renderer->SetVertexAttribPointer(false, _generalMatrix.modelUniform);
     }
     void Cubo::SetEmission(const char* emmision)
     {
@@ -152,10 +152,10 @@ namespace Engine
         _renderer->SetVertexBuffer(_vertexSize, _vertices, _vao, _vbo);
         _renderer->SetIndexBuffer(_vertexSize, _index, _ebo);
 
-        _renderer->SetCubeVertexAttribPointer(_modelUniform);
+        _renderer->SetCubeVertexAttribPointer(_generalMatrix.modelUniform);
         _renderer->BindTexture(_emissionMap);
 
-        _renderer->SetVertexAttribPointer(false, _modelUniform);
+        _renderer->SetVertexAttribPointer(false, _generalMatrix.modelUniform);
     }
     /*Cubo::Cubo(const char* filePath, Renderer* renderer) : Entity()
     {
@@ -205,7 +205,7 @@ namespace Engine
 	{
 	    _renderer->BindTexture2(_diffuseMap, _specularMap);
         _renderer->UpdateMaterial(_material);
-		_renderer->UpdateModel(_generalMatrix.model, _modelUniform);
+		_renderer->UpdateModel(_generalMatrix.model, _generalMatrix.modelUniform);
 		//_renderer->BindTexture2(_diffuseMap, _specularMap);
 
 		//_renderer->SetCubeVertexAttribPointer(_modelUniform);

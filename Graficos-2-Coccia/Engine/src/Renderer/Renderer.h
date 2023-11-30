@@ -6,7 +6,10 @@
 #include "..\Shader\Shader.h"
 #include "..\Camera\Camera.h"
 #include "glm\glm\mat4x4.hpp"
+
 using namespace glm;
+using namespace std;
+
 namespace Engine
 {
 
@@ -85,7 +88,7 @@ namespace Engine
 		void CreateBuffers();
 		void BindBuffers();
 
-
+		void SetMesh(string locationName, int texNumber, bool usesSpecularMaps);
 		void SetVertexShapeAttribPointer();
 		void SetVertexSpriteAttribPointer();
 		void SetCubeVertexAttribPointer(unsigned int& model);

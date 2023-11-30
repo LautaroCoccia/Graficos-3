@@ -50,7 +50,7 @@ namespace Engine
 		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 50, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
-		_model = new Model("res/Models/backpack/backpack.obj",false,false);
+		_model = new Model("res/Models/backpack/bodyna2.fbx",false,false);
 		_model->SetPosition(0, 0, 0);
 
 		BSPplanes.push_back(new LogicalPlane("bspPlaneLeft", "res/RockWall.jpg", glm::vec3(1, 0, 0)));
@@ -130,7 +130,7 @@ namespace Engine
 		_player3D->GetLight()->SetLightData(glm::vec3(1, 1, 1), glm::vec3(1,1,1), glm::vec3(1, 1, 1), glm::vec3(1,1,1));
 		bsp = new BSP();
 		bsp->AddModel(_model);
-		bsp->AddPlane(BSPplanes[0]);
+		bsp->AddPlane(BSPplanes[2]);
 		// --------------------------------
 
 		//_box = new Sprite(GetRenderer());
@@ -176,8 +176,8 @@ namespace Engine
 		bsp->CalculateBSP();
 		if (Input::GetKey(Keycode::ALPHA1))
 		{
-			glm::vec3 algo =(_model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime, _model->_transform.scale += deltaTime);
-			_model->ScaleModel(algo.x, algo.y, algo.z);
+			glm::vec3 algo =(_cubito->_transform.scale += deltaTime, _cubito->_transform.scale += deltaTime, _cubito->_transform.scale += deltaTime);
+			_cubito->SetScale(algo.x, algo.y, algo.z);
 		}
 		if (Input::GetKey(Keycode::ALPHA9))
 		{
@@ -226,8 +226,7 @@ namespace Engine
 			{
 				if (BSPplanes[i] != NULL)
 				{
-					cout << "Estoy vivo" << endl;
-					BSPplanes[0]->Draw();
+					BSPplanes[i]->Draw();
 				}
 			}
 		}

@@ -14,7 +14,7 @@ namespace Engine
 	{
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
-			_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
+			//_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
 		}
 	}
 
@@ -26,13 +26,14 @@ namespace Engine
 			{
 				x = 0; y = 0; z = 0;
 			}
-			_model.meshes[i]->SetScale(x, y, z);
+			//_model.meshes[i]->SetScale(x, y, z);
 		}
 	}
 
 	void Model::Draw()
 	{
-		_model.renderer->UpdateProgram(TRS);
+		//_renderer->UpdateModelUniform(_generalMatrix.model, _renderer->GetShader());
+		_renderer->UpdateProgram(_generalMatrix.model);
 		for (unsigned int i = 0; i < _model.meshes.size(); i++)
 		{
 			_model.meshes[i]->Draw();

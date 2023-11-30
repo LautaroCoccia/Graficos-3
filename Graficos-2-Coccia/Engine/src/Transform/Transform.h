@@ -29,6 +29,7 @@ namespace Engine
 		mat4 rotateY;
 		mat4 rotateZ;
 		mat4 scale;
+		unsigned int modelUniform;
 	};
 	class EXPORT_API Transform
 	{
@@ -43,7 +44,6 @@ namespace Engine
 		void SetPrebRotationZ(float z);
 		void SetPrebScale(vec3 scale);
 	public:
-		mat4 TRS;
 		GeneralMatrix _generalMatrix;
 		Transforms _transform;
 		

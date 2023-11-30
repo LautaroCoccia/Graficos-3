@@ -115,6 +115,19 @@ namespace Engine
 		glBindBuffer(GL_ARRAY_BUFFER, _VBO); //first: type buffer to bound 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _EBO); //second: the buffer 
 	}
+
+	void Renderer::SetMesh(string locationName, int texNumber, bool usesSpecularMaps)
+	{
+		glUseProgram(_shader->GetShader());
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), (GLchar*)locationName.c_str()), texNumber);
+		//SetMaterial(defaultMat);
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "mat.useSpecularMaps"), usesSpecularMaps);
+		if (!usesSpecularMaps)
+		{
+			glUniform3fv(glGetUniformLocation(_shader->GetShader(), "mat.specular"), 1, value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+		}
+		glUniform1i(glGetUniformLocation(_shader->GetShader(), "isModel"), true);
+	}
 	void Renderer::SetVertexShapeAttribPointer()
 	{
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (void*)0);
@@ -195,9 +208,11 @@ namespace Engine
 	}
 	void Renderer::UpdateProgram(mat4 model)
 	{
+
 		unsigned int transformLocation = glGetUniformLocation(_shader->GetShader(), "Model");
 		glUseProgram(_shader->GetShader());
 		glUniformMatrix4fv(transformLocation, 1, GL_FALSE, value_ptr(model));
+		//UpdateMVP(model);
 	}
 	void Renderer::DisableTexture()
 	{

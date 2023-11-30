@@ -22,9 +22,11 @@ namespace Engine
 	};
 	struct Vertex
 	{
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
+		vec3 Position;
+		vec3 Normal;
+		vec2 TexCoords;
+		vec3 Tangent;
+		vec3 Bitangent;
 	};
 
 	struct MeshTexture
