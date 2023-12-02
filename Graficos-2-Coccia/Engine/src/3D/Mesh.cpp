@@ -107,7 +107,7 @@ void Mesh::Draw()
 			// and finally bind the texture
 			glBindTexture(GL_TEXTURE_2D, textures[i].id);
 		}
-		//_renderer->UpdateModelUniform(_generalMatrix.model, _renderer->GetShader());
+		_renderer->UpdateModelUniform(_generalMatrix.model, _renderer->GetShader()); //POR QUE FUNCIONA??
 		//_renderer->UpdateProgram(_generalMatrix.model);
 		// draw mesh
 		glBindVertexArray(_vao);

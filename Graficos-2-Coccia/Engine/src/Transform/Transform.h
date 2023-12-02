@@ -13,6 +13,10 @@ namespace Engine
 		vec3 rotation;
 		vec3 scale;
 
+		vec3 localPosition;
+		vec3 localRotation;
+		vec3 localScale;
+
 		vec3 preb_position;
 		vec3 preb_rotation;
 		vec3 preb_scale;

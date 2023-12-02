@@ -1,5 +1,5 @@
 #include "Model.h"
-
+#include <glm/ext/matrix_transform.hpp>
 namespace Engine
 {
 
@@ -12,10 +12,15 @@ namespace Engine
 
 	void Model::MoveModel(glm::vec3 direction) 
 	{
+		_transform.position = direction;
+
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
-			//_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
+			_model.meshes[0]->SetPosition(direction.x, direction.y, direction.z);
+
 		}
+		_generalMatrix.translate = translate(mat4(1.0f), _transform.position);
+		UpdateMatrix();
 	}
 
 	void Model::ScaleModel(float x, float y, float z) 

@@ -181,12 +181,12 @@ namespace Engine
 		}
 		if (Input::GetKey(Keycode::ALPHA9))
 		{
-			_model->SetPosition(_model->_transform.position.x -= (10 * deltaTime), _model->_transform.position.y, _model->_transform.position.z);
+			_model->MoveModel(vec3(_model->_transform.position.x -= (10 * deltaTime), _model->_transform.position.y, _model->_transform.position.z));
 
 		}
 		else if (Input::GetKey(Keycode::ALPHA8))
 		{
-			_model->SetPosition(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z);
+			_model->MoveModel(vec3(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z));
 		}
 
 		//_model->ScaleModel(0,0,0);
