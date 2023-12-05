@@ -4,6 +4,7 @@
 #include "glm\gtc\type_ptr.hpp"
 #include "../Input/Input.h"
 #include <iostream>
+using namespace std;
 namespace Engine
 {
 	static void MouseCallback(GLFWwindow* window, double xpos, double ypos);
@@ -299,6 +300,8 @@ namespace Engine
 			break;
 		default:
 			break;
+
+
 		}
 	}
 	glm::mat4 Camera::GetView()

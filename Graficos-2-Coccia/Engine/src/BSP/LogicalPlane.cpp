@@ -32,7 +32,7 @@ namespace Engine
 
     }
 
-    bool LogicalPlane::FrontPlane(glm::vec3 point)
+    bool LogicalPlane::GetSide(glm::vec3 point)
     {
         if (GetDistanceToPoint(point) > 0.0f)
             return true;

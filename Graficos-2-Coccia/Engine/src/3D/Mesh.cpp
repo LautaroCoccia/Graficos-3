@@ -1,7 +1,9 @@
 #include "Mesh.h"
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include  <iostream>
 
+using namespace std;
 using namespace Engine;
 
 unsigned int _modelUniform;
@@ -30,7 +32,7 @@ void Mesh::SetUpMesh()
 	// create buffers/arrays
 	glGenVertexArrays(1, &_vao);
 	glGenBuffers(1, &_vbo);
-	glGenBuffers(1, &_ebo);
+	glGenBuffers(1, &_ebo);                               
 
 	glBindVertexArray(_vao);
 	// load data into vertex buffers
@@ -73,6 +75,7 @@ void Mesh::Draw()
 
 	if (canDraw)
 	{
+		cout << " puedo dibujar" << endl;
 		// -------------------------------------
 
 	//_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
@@ -117,6 +120,9 @@ void Mesh::Draw()
 		// always good practice to set everything back to defaults once configured.
 		glActiveTexture(GL_TEXTURE0);
 	}
+	else
+		cout << "no puedo dibujar" << endl;
+
 	
 }
 BoundingBox Mesh::CalculateBoundingBox()

@@ -16,7 +16,7 @@ namespace Engine
 		LogicalPlane(std::string name, const char* path, vec3 inNormal);
 		~LogicalPlane();
 		float GetDistanceToPoint(vec3 point);
-		bool FrontPlane(vec3 point);
+		bool GetSide(vec3 point);
 		//void TriggerCollision(Entity* other) override;
 	private:
 		vec3 normal;

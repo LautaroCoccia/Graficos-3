@@ -1,5 +1,7 @@
 #include "Model.h"
 #include <glm/ext/matrix_transform.hpp>
+#include <iostream>
+using namespace std;
 namespace Engine
 {
 
@@ -14,15 +16,18 @@ namespace Engine
 	{
 		_transform.position = direction;
 
+		_generalMatrix.translate = translate(mat4(1.0f), _transform.position);
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
-			_model.meshes[0]->SetPosition(direction.x, direction.y, direction.z);
-
+			_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
+			//cout << "Position: " << _model.meshes[0]->GetPosition().x << " " << _model.meshes[0]->GetPosition().y << " " << _model.meshes[0]->GetPosition().z << endl;
 		}
-		_generalMatrix.translate = translate(mat4(1.0f), _transform.position);
 		UpdateMatrix();
 	}
-
+	//void Model::SetMeshPosition(vec3 pos, int meshIndex)
+	//{
+	//
+	//}
 	void Model::ScaleModel(float x, float y, float z) 
 	{
 		for (int i = 0; i < _model.meshes.size(); i++)
