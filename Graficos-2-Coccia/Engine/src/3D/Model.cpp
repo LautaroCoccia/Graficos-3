@@ -15,8 +15,8 @@ namespace Engine
 	void Model::MoveModel(glm::vec3 direction) 
 	{
 		_transform.position = direction;
-
 		_generalMatrix.translate = translate(mat4(1.0f), _transform.position);
+
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
 			_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);

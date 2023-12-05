@@ -26,13 +26,26 @@ namespace Engine
 
 	void ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
 	{
+		cout << "node name: " << node->mName.C_Str() << endl;
+		//aiMatrix4x4 transform = node->mTransformation;
+		//std::cout << "Transformation Matrix: " << std::endl;
+
 		Mesh* aux;
 		for (unsigned int i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 			aux = processMesh(mesh, scene, model);
-			model.meshes.push_back(processMesh(mesh, scene, model));
+
+			aiVector3D position, scaling;
+			aiQuaternion rotation;
+			node->mTransformation.Decompose(scaling, rotation, position);
+			aux->SetPosition(position.x, position.y, position.z);
+			aux->SetScale(scaling.x, scaling.y, scaling.z);
+			model.meshes.push_back(aux);
+
 		}
+		
+
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
 		{
 			processNode(node->mChildren[i], scene, model);
@@ -112,8 +125,8 @@ namespace Engine
 		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
-
-		return new Mesh(vertices, indices, textures, model.hasSpecularMaps);
+		Mesh* aux = new Mesh(vertices, indices, textures, model.hasSpecularMaps);
+		return aux;
 	}
 
 	vector<MeshTexture> ModelImporter::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model)
