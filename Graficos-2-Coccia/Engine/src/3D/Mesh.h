@@ -31,6 +31,10 @@ namespace Engine
 
 	struct MeshTexture
 	{
+		unsigned char* pixelData;
+		int width;
+		int height;
+		int nrChannels;
 		unsigned int id;
 		string type;
 		string path;

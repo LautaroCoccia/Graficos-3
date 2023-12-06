@@ -32,7 +32,7 @@ namespace Engine
 		static Mesh* processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model);
 		static vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model);
 
-		static unsigned int TextureFromFile(const char* path, const string& directory, bool gamma);
+		static MeshTexture TextureFromFile(const char* path, const string& directory, bool gamma);
 
 	public:
 		static void loadModel(string const& path, bool flipUVs, ModelData& model);

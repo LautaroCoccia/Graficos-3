@@ -16,20 +16,20 @@ vector<Mesh*> parents;
 	void ModelImporter::loadModel(string const& path, bool flipUVs, ModelData& model)
 	{
 		parents.clear();
-		model.meshes.clear();
-		stbi_set_flip_vertically_on_load(flipUVs);
+		//stbi_set_flip_vertically_on_load(flipUVs);
 		Assimp::Importer importer;
+		ModelData mod;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
 			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
 			return;
 		}
-		directory = path.substr(0, path.find_last_of('/'));
+		mod.directory = path.substr(0, path.find_last_of('/'));
 		
-
-		Mesh* aux=processNode(scene->mRootNode, scene, model);
-		model.parentMesh = aux;
+		cout << "Num meshes: " << scene->mRootNode->mNumMeshes << endl;
+		processNode(scene->mRootNode, scene, mod);
+		model = mod;
 	}
 
 	Mesh* ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
@@ -60,25 +60,10 @@ vector<Mesh*> parents;
 					m->imParent = true;
 					parents.push_back(m);
 				}
-		
-
-				aiVector3D position, scaling;
-				aiQuaternion rotation;
-				node->mTransformation.Decompose(scaling, rotation, position);
-				cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
-				m->SetPos(vec3(position.x, position.y, position.z));
-				//m->Scale(scaling.x, scaling.y, scaling.z);
-				
-				quat glmQUat(rotation.w, rotation.x, rotation.y, rotation.z);
-				
-				//float angle = glm::angle(glmQUat);
-				//vec3 axis = glm::axis(glmQUat);
-				//m->SetRotation(axis * angle);
 			
 		}
 		if(m!= NULL)
 			model.meshes.push_back(m);
-		
 
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
 		{
@@ -160,6 +145,7 @@ vector<Mesh*> parents;
 		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
+
 		return new Mesh(vertices, indices, textures, model.hasSpecularMaps);
 	}
 
@@ -185,30 +171,36 @@ vector<Mesh*> parents;
 			{
 
 				MeshTexture texture;
-				texture.id = TextureFromFile(str.C_Str(), directory, false);
+				texture = TextureFromFile(str.C_Str(), model.directory,false);
+				if (texture.path == "")
+				{
+					model.directory = "../Graficos-2-Coccia/The_Game/res";
+					texture = TextureFromFile("wall.png", model.directory,false);
+				}
+
 				texture.type = typeName;
-				texture.path = str.C_Str();
 				textures.push_back(texture);
 				model.textures_loaded.push_back(texture);
+				
 			}
 		}
 		return textures;
 	}
 
-	unsigned int ModelImporter::TextureFromFile(const char* path, const string& directory, bool gamma)
+	MeshTexture ModelImporter::TextureFromFile(const char* path, const string& directory, bool gamma)
 	{
 		string filename = string(path);
 		filename = directory + '/' + filename;
 
-		unsigned int textureID;
-		glGenTextures(1, &textureID);
+		MeshTexture textureID;
+		glGenTextures(1, &textureID.id);
 
 		int width;
 		int height;
 		int nrComponents;
 
-		unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-		if (data)
+		textureID.pixelData = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
+		if (textureID.pixelData)
 		{
 			GLenum format;
 			if (nrComponents == 1)
@@ -224,8 +216,8 @@ vector<Mesh*> parents;
 				format = GL_RGBA;
 			}
 
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+			glBindTexture(GL_TEXTURE_2D, textureID.id);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, textureID.pixelData);
 			glGenerateMipmap(GL_TEXTURE_2D);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -233,12 +225,13 @@ vector<Mesh*> parents;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-			stbi_image_free(data);
+			stbi_image_free(textureID.pixelData);
 		}
 		else
 		{
 			cout << "Texture failed to load at path: " << path << endl;
-			stbi_image_free(data);
+			stbi_image_free(textureID.pixelData);
+			textureID.path = "";
 		}
 		return textureID;
 	}

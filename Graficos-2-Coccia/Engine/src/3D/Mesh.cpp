@@ -97,20 +97,21 @@ void Mesh::SetPos(vec3 pos)
 {
 	_transform.localPosition = pos;
 
-	if (parent)
+	if (parent )
 	{
 		_transform.position = parent->_transform.position + _transform.localPosition;
 	}
 	else
 	{
 		_transform.position = _transform.localPosition;
-
 	}
 
 	_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
 
 	for (int i = 0; i < children.size(); i++)
 		children[i]->UpdateSonPos();
+
+	UpdateMatrix();
 }
 
 void Mesh::Scale(float x, float y, float z) 
@@ -200,7 +201,7 @@ void Mesh::Draw()
 
 	if (canDraw)
 	{
-		cout << " puedo dibujar" << endl;
+		//cout << " puedo dibujar" << endl;
 		// -------------------------------------
 
 	//_modelUniform = glGetUniformLocation(_renderer->GetShader(), "model");
@@ -254,7 +255,8 @@ BoundingBox Mesh::CalculateBoundingBox()
 {
 	BoundingBox bbox;
 
-	if (vertices.empty()) {
+	if (vertices.empty())
+	{
 		bbox.min = { 0.0f, 0.0f, 0.0f };
 		bbox.max = { 0.0f, 0.0f, 0.0f };
 		return bbox;
@@ -263,7 +265,8 @@ BoundingBox Mesh::CalculateBoundingBox()
 	bbox.min = vertices[0].Position;
 	bbox.max = vertices[0].Position;
 
-	for (const auto& vertex : vertices) {
+	for (const auto& vertex : vertices) 
+	{
 		bbox.min.x = std::min(bbox.min.x, vertex.Position.x);
 		bbox.min.y = std::min(bbox.min.y, vertex.Position.y);
 		bbox.min.z = std::min(bbox.min.z, vertex.Position.z);

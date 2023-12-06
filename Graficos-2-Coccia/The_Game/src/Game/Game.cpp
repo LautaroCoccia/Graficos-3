@@ -53,39 +53,40 @@ namespace Engine
 		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
 		_model->SetPosition(0, 0, 0);
 		//Head??
-		_model->SetMeshPosition(0, 4.8, 0, 0);
+		_model->SetMeshPosition(0, 2, 0, 0);
+		//_model->SetMeshScale(0.3, 0.3, 0.3, 0);
 		//Body
-		_model->SetMeshPosition(0, 1, 0, 1);
-
+		_model->SetMeshPosition(0, -2.5, 0, 1);
+		//_model->SetMeshScale(0.3, 0.3, 0.3, 1);
 		//Hip
-		_model->SetMeshPosition(0, 5, 0, 2);
-		_model->SetMeshScale(0.5, 0.5, 0.5, 2);
+		_model->SetMeshPosition(0, -0.25, 0, 2);
+		/*_model->SetMeshScale(0.2, 0.1, 0.1, 2);
 
 		//Right leg
-		_model->SetMeshPosition(0, 4, 0, 3);
-		_model->SetMeshScale(1.5, 0.75, 1.5, 3);
+		_model->SetMeshPosition(1, -0.75, 0, 3);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 3);
 		//Right foot
-		_model->SetMeshPosition(0.05, -0.2, 0, 4);
-		_model->SetMeshScale(0.33, 1, 0.33, 4);
+		_model->SetMeshPosition(0.090, -0.30, 0, 4);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 4);
 		//left leg
-		_model->SetMeshPosition(0, -0.15, -0.05, 5);
-		_model->SetMeshScale(0.9, 0.6, 3, 5);
+		_model->SetMeshPosition(-0.1, -0.25, -0, 5);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 5);
 		//left foot
-		_model->SetMeshPosition(-0.05, -0.2, 0, 6);
-		_model->SetMeshScale(0.33, 1, 0.33, 6);
+		_model->SetMeshPosition(-0.090, -0.30, 0, 6);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 6);
 		//right arm
-		_model->SetMeshPosition(0, -0.15, -0.05, 7);
-		_model->SetMeshScale(0.9, 0.6, 3, 7);
+		_model->SetMeshPosition(0, -0, -0, 7);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 7);
 
 		//right hand
-		_model->SetMeshPosition(0.15, 0, 0, 8);
-		_model->SetMeshScale(3, 0.33, 0.5, 8);
+		_model->SetMeshPosition(0, 0, 0, 8);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 8);
 		//left arm
-		_model->SetMeshPosition(0.2, 0.0, 0, 9);
-		_model->SetMeshScale(0.33, 2, 2, 9);
+		_model->SetMeshPosition(0, 0.0, 0, 9);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 9);
 		//left hand
-		_model->SetMeshPosition(-0.15, 0, 0, 10);
-		_model->SetMeshScale(3, 0.33, 0.5, 10);
+		_model->SetMeshPosition(-0, 0, 0, 10);
+		_model->SetMeshScale(0.3, 0.3, 0.3, 10);*/
 
 		//_model->SetMeshPosition(-0.2, 0, 0, 11);
 		//_model->SetMeshScale(0.33, 2, 2, 11);
@@ -112,8 +113,8 @@ namespace Engine
 		
 		//_model->SetScale(0.25, 0.25, 0.25);
 
-		//_model2 = new Model(GetRenderer(),"res/Models/Skate/characterMedium.fbx", false,false);
-		//_model2->SetPosition(0, 1, 0);
+		_model2 = new Model("res/Models/backpack/bodyna3.fbx", false, false);
+		_model2->SetPosition(0, 0, 0);
 
 		_light = new Spotlight(vec3(1,1,1),vec3(1,1,0 ),vec3(1,1,1));
 		_light->SetPosition(glm::vec3(0, 1, 0));
@@ -210,10 +211,43 @@ namespace Engine
 	{
 		UpdateEngine(0.5f, 0.5f, 0.5f, 1);
 	}
-	float xMesh = 0.01f, yMesh = 2.51f, zMesh = 0.01f;
+	int index = 0;
+	bool pressed = false;
+	float xMesh = 0.0f, yMesh = 0, zMesh = 0.0f;
+	float xIndex = 0.0f, yIndex = 0, zIndex= 0.0f;
 	void Game::Update(float deltaTime)
 	{
+
 		bsp->CalculateBSP();
+	
+		if (Input::GetKey(Keycode::UP))
+		{
+			yIndex += 5 * deltaTime;
+			cout << yIndex << endl;
+			_model->SetMeshPosition(xIndex, yIndex , zIndex, index);
+
+		}
+		else if (Input::GetKey(Keycode::DOWN))
+		{
+			yIndex -= 5 * deltaTime;
+			cout << yIndex << endl;
+			_model->SetMeshPosition(xIndex, yIndex, zIndex, index);
+		}
+		if (Input::GetKey(Keycode::LEFT))
+		{
+			xIndex -= 5 * deltaTime;
+			cout << xIndex << endl;
+			_model->SetMeshPosition(xIndex, yIndex, zIndex, index);
+
+		}
+		else if (Input::GetKey(Keycode::RIGHT))
+		{
+			xIndex += 5 * deltaTime;
+			cout << xIndex << endl;
+			_model->SetMeshPosition(xIndex, yIndex, zIndex, index);
+
+		}
+		
 		if (Input::GetKey(Keycode::ALPHA1))
 		{
 			glm::vec3 algo =(_cubito->_transform.scale += deltaTime, _cubito->_transform.scale += deltaTime, _cubito->_transform.scale += deltaTime);
@@ -222,13 +256,17 @@ namespace Engine
 		if (Input::GetKey(Keycode::ALPHA9))
 		{
 			xMesh -= 10 * deltaTime;
-			_model->SetMeshPosition(xMesh, yMesh, zMesh,1);
+
+			_model->SetMeshPosition(xMesh, yMesh, zMesh, 0);
+			//_model->MoveModel(vec3(xMesh,yMesh,zMesh));
+			//s_model->SetMeshPosition(xMesh, yMesh, zMesh,0);
 
 		}
 		else if (Input::GetKey(Keycode::ALPHA8))
 		{
 			xMesh += 10 * deltaTime;
-			_model->SetMeshPosition(xMesh, yMesh, zMesh, 1);
+			_model->SetMeshPosition(xMesh,yMesh,zMesh,0);
+			//_model->SetMeshPosition(xMesh, yMesh, zMesh, 0);
 
 			//_model->SetMeshPosition(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z,1);
 		}
@@ -250,6 +288,7 @@ namespace Engine
 		//_model->Draw();
 		//_model->SetPosition(_player3D->GetPosition());
 		_model->Draw();
+		//_model2->Draw();
 		//_model2->Draw();
 		//_cubito->Draw();
 		if (_camera->GetCurrentMode() != CameraMode::FlyCamera)

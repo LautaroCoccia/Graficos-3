@@ -83,8 +83,8 @@ namespace Engine
 
 		if(_dLight !=NULL)
 			_dLight->Draw(0);
-		if (_cubeModel != NULL)
-			_cubeModel->Draw();
+		//if (_cubeModel != NULL)
+			//_cubeModel->Draw();
 
 	}
 	void Player3D::TriggerCollision(Entity* other)
