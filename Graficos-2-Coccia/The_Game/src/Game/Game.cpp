@@ -52,33 +52,38 @@ namespace Engine
 
 		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
 		_model->SetPosition(0, 0, 0);
-		_model->SetMeshPosition(0, 5, 0, 1);
+		//Head??
+		_model->SetMeshPosition(0, 4.8, 0, 0);
+		//Body
+		_model->SetMeshPosition(0, 1, 0, 1);
 
+		//Hip
+		_model->SetMeshPosition(0, 5, 0, 2);
+		_model->SetMeshScale(0.5, 0.5, 0.5, 2);
 
-		_model->SetMeshPosition(0, -0.2, 0, 2);
-		_model->SetMeshScale(0.5, 1.33, 0.5, 2);
-
-		_model->SetMeshPosition(0, -0.225, 0, 3);
+		//Right leg
+		_model->SetMeshPosition(0, 4, 0, 3);
 		_model->SetMeshScale(1.5, 0.75, 1.5, 3);
-
+		//Right foot
 		_model->SetMeshPosition(0.05, -0.2, 0, 4);
 		_model->SetMeshScale(0.33, 1, 0.33, 4);
-
+		//left leg
 		_model->SetMeshPosition(0, -0.15, -0.05, 5);
 		_model->SetMeshScale(0.9, 0.6, 3, 5);
-
+		//left foot
 		_model->SetMeshPosition(-0.05, -0.2, 0, 6);
 		_model->SetMeshScale(0.33, 1, 0.33, 6);
-
+		//right arm
 		_model->SetMeshPosition(0, -0.15, -0.05, 7);
 		_model->SetMeshScale(0.9, 0.6, 3, 7);
 
+		//right hand
 		_model->SetMeshPosition(0.15, 0, 0, 8);
 		_model->SetMeshScale(3, 0.33, 0.5, 8);
-
+		//left arm
 		_model->SetMeshPosition(0.2, 0.0, 0, 9);
 		_model->SetMeshScale(0.33, 2, 2, 9);
-
+		//left hand
 		_model->SetMeshPosition(-0.15, 0, 0, 10);
 		_model->SetMeshScale(3, 0.33, 0.5, 10);
 

@@ -23,7 +23,7 @@ namespace Engine
 
 		_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
 		UpdateMatrix();
-		std::cout << "position: " << _transform.position.x << " " << _transform.position.y << " " << _transform.position.z << endl;
+		//std::cout << "position: " << _transform.position.x << " " << _transform.position.y << " " << _transform.position.z << endl;
 	}
 
 	void Transform::SetPosition(glm::vec3 position)

@@ -50,13 +50,13 @@ namespace Engine
 		{
 
 			bool cameraIsFront = planes[i]->GetSide(cameraPos);
-			if (cameraIsFront)
-				cout << "mismo lado que plano " << i << endl;
-			else 
-				cout << "Nop" << i << endl;
+			//if (cameraIsFront)
+				//cout << "mismo lado que plano " << i << endl;
+			//else 
+				//cout << "Nop" << i << endl;
 			int verticesInFrontCount = 0;
-			if(planes[i]->GetSide(mesh->GetPosition()) != cameraIsFront)
-				cout << "Nop estan del mismo lado" << i << endl;
+			//if(planes[i]->GetSide(mesh->GetPosition()) != cameraIsFront)
+				//cout << "Nop estan del mismo lado" << i << endl;
 
 			for (const glm::vec3& aux : mesh->verticesBoundingBox) {
 				if (planes[i]->GetSide(mesh->GetPosition() + aux) != cameraIsFront) {

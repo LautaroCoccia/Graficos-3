@@ -67,6 +67,7 @@ void Mesh::CreateMesh(float* vertices, uint* indices, uint numOfVertices, uint n
 void Mesh::SetNode(aiNode* _myself)
 {
 	myself = _myself;
+	name = myself->mName.C_Str();
 	cout << "Myself: " << myself->mName.C_Str() << endl;
 }
 
@@ -77,7 +78,8 @@ aiNode* Mesh::GetNode()
 
 void Mesh::SetParent(Mesh* _parent)
 {
-	//cout << "My parent is: " << _parent->myself->mName.C_Str() << endl;
+	cout << "My parent is: " << _parent->myself->mName.C_Str() << endl;
+	cout << "I am: " << myself->mName.C_Str() << endl;
 	parent = _parent;
 }
 
@@ -102,6 +104,7 @@ void Mesh::SetPos(vec3 pos)
 	else
 	{
 		_transform.position = _transform.localPosition;
+
 	}
 
 	_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);

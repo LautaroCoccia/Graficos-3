@@ -40,8 +40,11 @@ namespace Engine
 	}
 	void Model::SetMeshPosition(float x, float y, float z, int index)
 	{
+		cout << _model.meshes[index]->name.c_str()<< " index "<< index << endl;
 		if (index == 0)
 		{
+			_model.meshes[index]->SetPos(vec3(x, y, z));
+
 			_transform.position = { x, y, z };
 			_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
 			//structure.meshes[index]->SetPosition(x, y, z);
@@ -73,7 +76,7 @@ namespace Engine
 		for (unsigned int i = 0; i < _model.meshes.size(); i++)
 		{
 			if(i!=0)
-			_model.meshes[i]->Draw();
+				_model.meshes[i]->Draw();
 		}
 	}
 	void Model::TriggerCollision(Entity* other) { }

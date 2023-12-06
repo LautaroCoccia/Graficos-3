@@ -58,6 +58,7 @@ namespace Engine
 		void SetUpMesh();
 
 	public:
+		string name;
 		bool imParent;
 		vector<Mesh*> children;
 		bool canDraw;

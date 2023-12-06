@@ -28,9 +28,8 @@ vector<Mesh*> parents;
 		directory = path.substr(0, path.find_last_of('/'));
 		
 
-		processNode(scene->mRootNode, scene, model);
-
-		//model.parentMesh = aux;
+		Mesh* aux=processNode(scene->mRootNode, scene, model);
+		model.parentMesh = aux;
 	}
 
 	Mesh* ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
@@ -66,8 +65,8 @@ vector<Mesh*> parents;
 				aiVector3D position, scaling;
 				aiQuaternion rotation;
 				node->mTransformation.Decompose(scaling, rotation, position);
-				//m->SetPos(vec3(position.x, position.y, position.z));
 				cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
+				m->SetPos(vec3(position.x, position.y, position.z));
 				//m->Scale(scaling.x, scaling.y, scaling.z);
 				
 				quat glmQUat(rotation.w, rotation.x, rotation.y, rotation.z);
