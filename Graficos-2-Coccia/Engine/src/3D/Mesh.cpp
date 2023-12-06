@@ -4,6 +4,8 @@
 #include  <iostream>
 
 #include "glm/gtc/matrix_transform.hpp"
+#include <assimp/include/scene.h>
+
 using namespace std;
 using namespace Engine;
 
@@ -65,6 +67,7 @@ void Mesh::CreateMesh(float* vertices, uint* indices, uint numOfVertices, uint n
 void Mesh::SetNode(aiNode* _myself)
 {
 	myself = _myself;
+	cout << "Myself: " << myself->mName.C_Str() << endl;
 }
 
 aiNode* Mesh::GetNode()
@@ -74,6 +77,7 @@ aiNode* Mesh::GetNode()
 
 void Mesh::SetParent(Mesh* _parent)
 {
+	//cout << "My parent is: " << _parent->myself->mName.C_Str() << endl;
 	parent = _parent;
 }
 
@@ -92,14 +96,35 @@ void Mesh::SetPos(vec3 pos)
 	_transform.localPosition = pos;
 
 	if (parent)
+	{
 		_transform.position = parent->_transform.position + _transform.localPosition;
+	}
 	else
+	{
 		_transform.position = _transform.localPosition;
+	}
 
 	_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
 
 	for (int i = 0; i < children.size(); i++)
 		children[i]->UpdateSonPos();
+}
+
+void Mesh::Scale(float x, float y, float z) 
+{
+	 _transform.scale = { x, y, z };
+
+	if (parent)
+		_transform.localScale = parent->_transform.localScale * _transform.scale;
+	else
+		_transform.localScale = _transform.scale;
+
+	_generalMatrix.scale = glm::scale(glm::mat4(1.0f), _transform.localScale);
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonScale();
+
+	UpdateMatrix();
 }
 void Mesh::UpdateSonPos()
 {
@@ -110,6 +135,17 @@ void Mesh::UpdateSonPos()
 
 	for (int i = 0; i < children.size(); i++)
 		children[i]->UpdateSonPos();
+
+	UpdateMatrix();
+}
+
+void Mesh::UpdateSonScale()
+{
+	_transform.localScale = parent->_transform.localScale * _transform.scale;
+	_generalMatrix.scale = glm::scale(glm::mat4(1.0f), _transform.localScale);
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonScale();
 
 	UpdateMatrix();
 }

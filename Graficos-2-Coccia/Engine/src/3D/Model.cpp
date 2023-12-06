@@ -19,15 +19,41 @@ namespace Engine
 
 		for (int i = 0; i < _model.meshes.size(); i++)
 		{
-			_model.meshes[i]->SetPosition(direction.x, direction.y, direction.z);
+			_model.meshes[i]->SetPos(vec3(direction.x, direction.y, direction.z));
 			//cout << "Position: " << _model.meshes[0]->GetPosition().x << " " << _model.meshes[0]->GetPosition().y << " " << _model.meshes[0]->GetPosition().z << endl;
 		}
 		UpdateMatrix();
 	}
-	//void Model::SetMeshPosition(vec3 pos, int meshIndex)
-	//{
-	//
-	//}
+	void Model::SetMeshScale(float x, float y, float z, int index)
+	{
+		if (index == 0)
+		{
+			_transform.localScale = { x, y, z };
+			_generalMatrix.scale = glm::scale(glm::mat4(1.0f), _transform.localScale);
+			//structure.meshes[index]->Scale(x, y, z);
+
+			UpdateMatrix();
+		}
+		if (_model.meshes[index] != NULL)
+			_model.meshes[index]->SetScale(x, y, z);
+
+	}
+	void Model::SetMeshPosition(float x, float y, float z, int index)
+	{
+		if (index == 0)
+		{
+			_transform.position = { x, y, z };
+			_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
+			//structure.meshes[index]->SetPosition(x, y, z);
+
+			UpdateMatrix();
+		}
+		cout << _model.meshes.size() << endl;
+		if (_model.meshes[index] != NULL)
+			_model.meshes[index]->SetPos(vec3(x, y, z));
+		else
+			cout << "Error mesh index : " << index << endl;
+	}
 	void Model::ScaleModel(float x, float y, float z) 
 	{
 		for (int i = 0; i < _model.meshes.size(); i++)
@@ -46,6 +72,7 @@ namespace Engine
 		_renderer->UpdateProgram(_generalMatrix.model);
 		for (unsigned int i = 0; i < _model.meshes.size(); i++)
 		{
+			if(i!=0)
 			_model.meshes[i]->Draw();
 		}
 	}

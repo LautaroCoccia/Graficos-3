@@ -72,7 +72,9 @@ namespace Engine
 		Mesh* GetParent();
 		void AddMeshSon(Mesh* newChildren);
 		void SetPos(vec3 pos);
+		void Scale(float x, float y, float z);
 		void UpdateSonPos();
+		void UpdateSonScale();
 
 		void Draw();
 		BoundingBox CalculateBoundingBox();

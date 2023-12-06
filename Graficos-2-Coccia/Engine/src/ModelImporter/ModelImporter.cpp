@@ -7,6 +7,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 string directory;
+int num = 0;
 using namespace std;
 using namespace glm;
 namespace Engine
@@ -14,6 +15,8 @@ namespace Engine
 vector<Mesh*> parents;
 	void ModelImporter::loadModel(string const& path, bool flipUVs, ModelData& model)
 	{
+		parents.clear();
+		model.meshes.clear();
 		stbi_set_flip_vertically_on_load(flipUVs);
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
@@ -25,58 +28,64 @@ vector<Mesh*> parents;
 		directory = path.substr(0, path.find_last_of('/'));
 		
 
-		Mesh* aux = processNode(scene->mRootNode, scene, model);
-		model.parentMesh = aux;
+		processNode(scene->mRootNode, scene, model);
+
+		//model.parentMesh = aux;
 	}
 
 	Mesh* ModelImporter::processNode(aiNode* node, const aiScene* scene, ModelData& model)
 	{
-		Mesh* aux;
-		cout << "node name: " << node->mName.C_Str() << endl;
+		Mesh* m = nullptr;
+		//cout << "node name: " << node->mName.C_Str() << endl;
+		//cout << "node mashes: " << num <<  endl;
+		//num++;
 		//aiMatrix4x4 transform = node->mTransformation;
 		//std::cout << "Transformation Matrix: " << std::endl;
 
-		for (unsigned int i = 0; i < node->mNumMeshes; i++)
+		for (size_t i = 0; i < node->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-			aux = processMesh(mesh, scene, model);
-			aux->SetNode(node);
+			m = processMesh(mesh, scene, model);
+			m->SetNode(node);
 
 			for (int i = 0; i < parents.size(); i++)
-				if (aux->GetNode()->mParent == parents[i]->GetNode())
+				if (m->GetNode()->mParent == parents[i]->GetNode())
 				{
-					aux->SetParent(parents[i]);
-					parents[i]->AddMeshSon(aux);
+					m->SetParent(parents[i]);
+					parents[i]->AddMeshSon(m);
 					break;
 				}
 			if (node->mNumChildren > 0)
-				if (!aux->imParent)
+				if (!m->imParent)
 				{
-					aux->imParent = true;
-					parents.push_back(aux);
+					m->imParent = true;
+					parents.push_back(m);
 				}
-			aiVector3D position, scaling;
-			aiQuaternion rotation;
-			/*node->mTransformation.Decompose(scaling, rotation, position);
-			aux->SetPosition(position.x, position.y, position.z);
-			cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
-			aux->SetScale(scaling.x, scaling.y, scaling.z);
+		
 
-			quat glmQUat(rotation.w, rotation.x, rotation.y, rotation.z);
-
-			float angle = glm::angle(glmQUat);
-			vec3 axis = glm::axis(glmQUat);
-			aux->SetRotation(axis * angle);*/
-
+				aiVector3D position, scaling;
+				aiQuaternion rotation;
+				node->mTransformation.Decompose(scaling, rotation, position);
+				//m->SetPos(vec3(position.x, position.y, position.z));
+				cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
+				//m->Scale(scaling.x, scaling.y, scaling.z);
+				
+				quat glmQUat(rotation.w, rotation.x, rotation.y, rotation.z);
+				
+				//float angle = glm::angle(glmQUat);
+				//vec3 axis = glm::axis(glmQUat);
+				//m->SetRotation(axis * angle);
+			
 		}
-		model.meshes.push_back(aux);
+		if(m!= NULL)
+			model.meshes.push_back(m);
 		
 
 		for (unsigned int i = 0; i < node->mNumChildren; i++)
 		{
 			processNode(node->mChildren[i], scene, model);
 		}
-		return aux;
+		return m;
 	}
 
 	Mesh* ModelImporter::processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model)
@@ -152,8 +161,7 @@ vector<Mesh*> parents;
 		vector<MeshTexture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height", model);
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 		//return Mesh(vertices, indices, textures, model.hasSpecularMaps, model.renderer);
-		Mesh* aux = new Mesh(vertices, indices, textures, model.hasSpecularMaps);
-		return aux;
+		return new Mesh(vertices, indices, textures, model.hasSpecularMaps);
 	}
 
 	vector<MeshTexture> ModelImporter::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model)

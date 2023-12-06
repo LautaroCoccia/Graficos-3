@@ -52,38 +52,39 @@ namespace Engine
 
 		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
 		_model->SetPosition(0, 0, 0);
-		/*_model->SetMeshPos(0, 0.5, 0, 1);
+		_model->SetMeshPosition(0, 5, 0, 1);
 
-		_model->SetMeshPos(0, -0.2, 0, 2);
+
+		_model->SetMeshPosition(0, -0.2, 0, 2);
 		_model->SetMeshScale(0.5, 1.33, 0.5, 2);
 
-		_model->SetMeshPos(0, -0.225, 0, 3);
+		_model->SetMeshPosition(0, -0.225, 0, 3);
 		_model->SetMeshScale(1.5, 0.75, 1.5, 3);
 
-		_model->SetMeshPos(0.05, -0.2, 0, 4);
+		_model->SetMeshPosition(0.05, -0.2, 0, 4);
 		_model->SetMeshScale(0.33, 1, 0.33, 4);
 
-		_model->SetMeshPos(0, -0.15, -0.05, 5);
+		_model->SetMeshPosition(0, -0.15, -0.05, 5);
 		_model->SetMeshScale(0.9, 0.6, 3, 5);
 
-		_model->SetMeshPos(-0.05, -0.2, 0, 6);
+		_model->SetMeshPosition(-0.05, -0.2, 0, 6);
 		_model->SetMeshScale(0.33, 1, 0.33, 6);
 
-		_model->SetMeshPos(0, -0.15, -0.05, 7);
+		_model->SetMeshPosition(0, -0.15, -0.05, 7);
 		_model->SetMeshScale(0.9, 0.6, 3, 7);
 
-		_model->SetMeshPos(0.15, 0, 0, 8);
+		_model->SetMeshPosition(0.15, 0, 0, 8);
 		_model->SetMeshScale(3, 0.33, 0.5, 8);
 
-		_model->SetMeshPos(0.2, 0.0, 0, 9);
+		_model->SetMeshPosition(0.2, 0.0, 0, 9);
 		_model->SetMeshScale(0.33, 2, 2, 9);
 
-		_model->SetMeshPos(-0.15, 0, 0, 10);
+		_model->SetMeshPosition(-0.15, 0, 0, 10);
 		_model->SetMeshScale(3, 0.33, 0.5, 10);
 
-		_model->SetMeshPos(-0.2, 0, 0, 11);
-		_model->SetMeshScale(0.33, 2, 2, 11);*/
-
+		//_model->SetMeshPosition(-0.2, 0, 0, 11);
+		//_model->SetMeshScale(0.33, 2, 2, 11);
+		
 
 		BSPplanes.push_back(new LogicalPlane("bspPlaneLeft", "res/RockWall.jpg", glm::vec3(1, 0, 0)));
 		BSPplanes[0]->SetMaterial(vec3(1), vec3(1), vec3(1), 32);
@@ -163,8 +164,8 @@ namespace Engine
 		bsp = new BSP();
 		bsp->AddModel(_model);
 		bsp->AddPlane(BSPplanes[0]);
-		//bsp->AddPlane(BSPplanes[1]);
-		//bsp->AddPlane(BSPplanes[2]);
+		bsp->AddPlane(BSPplanes[1]);
+		bsp->AddPlane(BSPplanes[2]);
 		// --------------------------------
 
 		//_box = new Sprite(GetRenderer());
@@ -204,7 +205,7 @@ namespace Engine
 	{
 		UpdateEngine(0.5f, 0.5f, 0.5f, 1);
 	}
-
+	float xMesh = 0.01f, yMesh = 2.51f, zMesh = 0.01f;
 	void Game::Update(float deltaTime)
 	{
 		bsp->CalculateBSP();
@@ -215,12 +216,16 @@ namespace Engine
 		}
 		if (Input::GetKey(Keycode::ALPHA9))
 		{
-			_model->MoveModel(vec3(_model->_transform.position.x -= (10 * deltaTime), _model->_transform.position.y, _model->_transform.position.z));
+			xMesh -= 10 * deltaTime;
+			_model->SetMeshPosition(xMesh, yMesh, zMesh,1);
 
 		}
 		else if (Input::GetKey(Keycode::ALPHA8))
 		{
-			_model->MoveModel(vec3(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z));
+			xMesh += 10 * deltaTime;
+			_model->SetMeshPosition(xMesh, yMesh, zMesh, 1);
+
+			//_model->SetMeshPosition(_model->_transform.position.x += 10 *deltaTime, _model->_transform.position.y, _model->_transform.position.z,1);
 		}
 
 		//_model->ScaleModel(0,0,0);

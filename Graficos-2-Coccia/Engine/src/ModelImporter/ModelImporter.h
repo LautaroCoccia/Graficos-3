@@ -17,6 +17,7 @@ namespace Engine
 		vector <MeshTexture> textures_loaded;
 		vector<Mesh*> meshes;
 		Mesh* parentMesh;
+		std::string directory;
 		bool hasSpecularMaps;
 
 		Renderer* renderer;
