@@ -40,7 +40,7 @@ namespace Engine
 
 			aiVector3D position, scaling;
 			aiQuaternion rotation;
-			node->mTransformation.Decompose(scaling, rotation, position);
+			/*node->mTransformation.Decompose(scaling, rotation, position);
 			aux->SetPosition(position.x, position.y, position.z);
 			cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
 			aux->SetScale(scaling.x, scaling.y, scaling.z);
@@ -49,7 +49,7 @@ namespace Engine
 
 			float angle = glm::angle(glmQUat);
 			vec3 axis = glm::axis(glmQUat);
-			aux->SetRotation(axis * angle);
+			aux->SetRotation(axis * angle);*/
 			model.meshes.push_back(aux);
 
 		}
