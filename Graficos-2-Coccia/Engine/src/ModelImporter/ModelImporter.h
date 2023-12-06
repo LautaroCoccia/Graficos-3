@@ -14,7 +14,6 @@ namespace Engine
 {
 	struct ModelData
 	{
-		aiMatrix4x4 transform;
 		vector <MeshTexture> textures_loaded;
 		vector<Mesh*> meshes;
 		Mesh* parentMesh;

@@ -50,7 +50,7 @@ namespace Engine
 		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 50, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
-		_model = new Model("res/Models/backpack/bodyna2.fbx",false,false);
+		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
 		_model->SetPosition(0, 0, 0);
 		/*_model->SetMeshPos(0, 0.5, 0, 1);
 

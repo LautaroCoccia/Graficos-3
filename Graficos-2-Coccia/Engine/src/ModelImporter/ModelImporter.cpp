@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include "GL/glew.h"
+#include "glm/glm.hpp"
+ #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 string directory;
-
 using namespace std;
 using namespace glm;
 namespace Engine
@@ -20,7 +22,7 @@ namespace Engine
 			return;
 		}
 		directory = path.substr(0, path.find_last_of('/'));
-
+		
 		processNode(scene->mRootNode, scene, model);
 	}
 
@@ -40,7 +42,14 @@ namespace Engine
 			aiQuaternion rotation;
 			node->mTransformation.Decompose(scaling, rotation, position);
 			aux->SetPosition(position.x, position.y, position.z);
+			cout << "node Pos X: " << position.x << " Pos Y: " << position.y << " Pos Z : "<< position.z<< endl;
 			aux->SetScale(scaling.x, scaling.y, scaling.z);
+
+			quat glmQUat(rotation.w, rotation.x, rotation.y, rotation.z);
+
+			float angle = glm::angle(glmQUat);
+			vec3 axis = glm::axis(glmQUat);
+			aux->SetRotation(axis * angle);
 			model.meshes.push_back(aux);
 
 		}

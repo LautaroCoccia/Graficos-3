@@ -61,7 +61,6 @@ namespace Engine
 		vector<Mesh*> children;
 		bool canDraw;
 		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps);
-		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, Transform);
 		~Mesh();
 		void Draw();
 		BoundingBox CalculateBoundingBox();
