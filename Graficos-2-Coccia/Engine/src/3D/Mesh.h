@@ -13,7 +13,7 @@
 #include <array>
 
 using namespace std;
-
+struct aiNode;
 namespace Engine
 {
 	struct BoundingBox {
@@ -45,23 +45,35 @@ namespace Engine
 		unsigned int _positionAttrib;
 		unsigned int _normalAttrib;
 		unsigned int _textureAttrib;
-
+		int indexCount;
 		BoundingBox _boundingBox;
 		vector<Vertex> vertices;
 		vector<unsigned int> indices;
 		vector<MeshTexture> textures;
 		Mesh* parent;
-
+		aiNode* myself;
 		bool _usesSpecularMaps;
 		Renderer* _renderer;
 
 		void SetUpMesh();
 
 	public:
+		bool imParent;
 		vector<Mesh*> children;
 		bool canDraw;
+		Mesh();
 		Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps);
 		~Mesh();
+		void CreateMesh(float* vertices, uint* indices, uint numOfVertices, uint numOfIndices);
+
+		void SetNode(aiNode* _myself);
+		aiNode* GetNode();
+		void SetParent(Mesh* _parent);
+		Mesh* GetParent();
+		void AddMeshSon(Mesh* newChildren);
+		void SetPos(vec3 pos);
+		void UpdateSonPos();
+
 		void Draw();
 		BoundingBox CalculateBoundingBox();
 		array<glm::vec3, 8> verticesBoundingBox;

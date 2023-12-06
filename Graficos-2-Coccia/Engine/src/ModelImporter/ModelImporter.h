@@ -24,9 +24,10 @@ namespace Engine
 
 	class EXPORT_API ModelImporter
 	{
-		
 	private:
-		static void processNode(aiNode* node, const aiScene* scene, ModelData& model);
+		std::vector<Mesh*> _meshesParent;
+		Mesh* _baseParent;
+		static Mesh* processNode(aiNode* node, const aiScene* scene, ModelData& model);
 		static Mesh* processMesh(aiMesh* mesh, const aiScene* scene, ModelData& model);
 		static vector<MeshTexture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName, ModelData& model);
 

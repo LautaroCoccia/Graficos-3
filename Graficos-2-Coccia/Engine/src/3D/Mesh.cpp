@@ -3,11 +3,19 @@
 #include <GLFW/glfw3.h>
 #include  <iostream>
 
+#include "glm/gtc/matrix_transform.hpp"
 using namespace std;
 using namespace Engine;
 
 unsigned int _modelUniform;
 
+Mesh::Mesh() : Entity()
+{
+	_renderer = _renderer->_staticRenderer;
+	_boundingBox = CalculateBoundingBox();
+	verticesBoundingBox = CalculateVerticesBoundingBox(_boundingBox);
+	SetUpMesh();
+}
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<MeshTexture> textures, bool usesSpecularMaps) : Entity()
 {
 	canDraw = true;
@@ -26,7 +34,85 @@ Mesh::~Mesh()
 {
 
 }
+void Mesh::CreateMesh(float* vertices, uint* indices, uint numOfVertices, uint numOfIndices) {
+	indexCount = numOfIndices;
 
+	glGenVertexArrays(1, &_vao);
+	glBindVertexArray(_vao);
+
+	glGenBuffers(1, &_ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(float) * numOfIndices, indices, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * numOfVertices, vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(_positionAttrib, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
+	glEnableVertexAttribArray(_positionAttrib);
+
+	glVertexAttribPointer(_textureAttrib, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(_textureAttrib);
+
+	glVertexAttribPointer(_normalAttrib, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(sizeof(float) * 5));
+	glEnableVertexAttribArray(_normalAttrib);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
+}
+void Mesh::SetNode(aiNode* _myself)
+{
+	myself = _myself;
+}
+
+aiNode* Mesh::GetNode()
+{
+	return myself;
+}
+
+void Mesh::SetParent(Mesh* _parent)
+{
+	parent = _parent;
+}
+
+Mesh* Mesh::GetParent()
+{
+	return parent;
+}
+
+void Mesh::AddMeshSon(Mesh* newChildren)
+{
+	children.push_back(newChildren);
+}
+
+void Mesh::SetPos(vec3 pos)
+{
+	_transform.localPosition = pos;
+
+	if (parent)
+		_transform.position = parent->_transform.position + _transform.localPosition;
+	else
+		_transform.position = _transform.localPosition;
+
+	_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonPos();
+}
+void Mesh::UpdateSonPos()
+{
+
+	_transform.position = parent->_transform.position + _transform.localPosition;
+
+	_generalMatrix.translate = glm::translate(glm::mat4(1.0f), _transform.position);
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonPos();
+
+	UpdateMatrix();
+}
 void Mesh::SetUpMesh()
 {
 	// create buffers/arrays

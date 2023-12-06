@@ -47,7 +47,7 @@ namespace Engine
 		srand(time(NULL));
 
 		_camera = new Camera(CameraType::Perspective, 0.001f, 25, 1200, 600, 0.5f);
-		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 50, 1200, 600, 0.5f);
+		_camera->SetCameraValues(CameraType::Perspective, 0.001f, 100, 1200, 600, 0.5f);
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
 		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
