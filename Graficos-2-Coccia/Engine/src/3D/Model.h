@@ -23,6 +23,10 @@ namespace Engine
 		ModelData _model;
 		void MoveModel(glm::vec3 direction);
 		void SetMeshPosition(float x, float y, float z, int index);
+		void SetMeshRotX(float x, int indexMesh);
+		void SetMeshRotY(float y, int indexMesh);
+		void SetMeshRotZ(float z, int indexMesh);
+		//void SetMeshRotation(float x, float y, float z, int index);
 		void SetMeshScale(float x, float y, float z, int index);
 
 		void ScaleModel(float x, float y, float z);

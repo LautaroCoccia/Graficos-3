@@ -113,7 +113,58 @@ void Mesh::SetPos(vec3 pos)
 
 	UpdateMatrix();
 }
+void Mesh::SetRotX(float x)
+{
+	_transform.localRotation.x = x;
 
+	if (parent)
+		_transform.rotation.x = parent->_transform.rotation.x + _transform.rotation.x;
+	else
+		_transform.rotation.x = _transform.localRotation.x;
+
+
+	_generalMatrix.rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotX();
+
+	UpdateMatrix();
+	//UpdateTransformsData();
+}
+void Mesh::SetRotY(float y) 
+{
+	_transform.localRotation.y = y;
+
+	if (parent)
+		_transform.rotation.y = parent->_transform.rotation.y + _transform.rotation.y;
+	else
+		_transform.rotation.y = _transform.localRotation.y;
+
+	_generalMatrix.rotateY= glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotY();
+
+	UpdateMatrix();
+	//UpdateTransformsData();
+}
+void Mesh::SetRotZ(float z) 
+{
+	_transform.localRotation.z = z;
+
+	if (parent)
+		_transform.rotation.z = parent->_transform.rotation.z + _transform.rotation.z;
+	else
+		_transform.rotation.z = _transform.localRotation.z;
+
+	_generalMatrix.rotateZ= glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotZ();
+
+	UpdateMatrix();
+	//UpdateTransformsData();
+}
 void Mesh::Scale(float x, float y, float z) 
 {
 	 _transform.scale = { x, y, z };
@@ -142,7 +193,40 @@ void Mesh::UpdateSonPos()
 
 	UpdateMatrix();
 }
+void Mesh::UpdateSonsRotX() {
 
+	_transform.rotation.x = parent->_transform.rotation.x + _transform.localRotation.x;
+	_generalMatrix.rotateX= glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.x), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotX();
+
+	UpdateMatrix();
+	//UpdateTransformsData();
+
+}
+
+void Mesh::UpdateSonsRotY() {
+	_transform.rotation.y = parent->_transform.rotation.y + _transform.localRotation.y;
+	_generalMatrix.rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.y), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotY();
+
+	UpdateMatrix();
+	//sUpdateTransformsData();
+}
+
+void Mesh::UpdateSonsRotZ() {
+	_transform.rotation.z = parent->_transform.rotation.z + _transform.localRotation.z;
+	_generalMatrix.rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(_transform.rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	for (int i = 0; i < children.size(); i++)
+		children[i]->UpdateSonsRotZ();
+
+	UpdateMatrix();
+	//UpdateTransformsData();
+}
 void Mesh::UpdateSonScale()
 {
 	_transform.localScale = parent->_transform.localScale * _transform.scale;

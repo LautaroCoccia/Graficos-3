@@ -51,15 +51,16 @@ namespace Engine
 		_camera->SetCameraMode(CameraMode::FlyCamera);
 
 		_model = new Model("res/Models/backpack/bodyna3.fbx",false,false);
-		_model->SetPosition(0, 0, 0);
+		_model->SetRotationX(-90);
+		//_model->SetPosition(0, 0, 0);
 		//Head??
-		_model->SetMeshPosition(0, 2, 0, 0);
+		//_model->SetMeshPosition(0, 2, 0, 0);
 		//_model->SetMeshScale(0.3, 0.3, 0.3, 0);
 		//Body
-		_model->SetMeshPosition(0, -2.5, 0, 1);
+		//_model->SetMeshPosition(0, -2.5, 0, 1);
 		//_model->SetMeshScale(0.3, 0.3, 0.3, 1);
 		//Hip
-		_model->SetMeshPosition(0, -0.25, 0, 2);
+		//s_model->SetMeshPosition(0, -0.25, 0, 2);
 		/*_model->SetMeshScale(0.2, 0.1, 0.1, 2);
 
 		//Right leg

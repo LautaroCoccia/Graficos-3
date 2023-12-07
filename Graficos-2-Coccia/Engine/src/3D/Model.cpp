@@ -47,6 +47,33 @@ namespace Engine
 		UpdateMatrix();
 		
 	}
+	void Model::SetMeshRotX(float x, int indexMesh) {
+		_transform.rotation.x = x;
+		_generalMatrix.rotateX = glm::rotate(glm::mat4(1.0f), glm::radians(x), glm::vec3(1.0f, 0.0f, 0.0f));
+		_model.meshes[indexMesh]->SetRotationX(x);
+
+		UpdateMatrix();
+		//UpdateTransformsData();
+	}
+
+	void Model::SetMeshRotY(float y, int indexMesh) {
+		_transform.rotation.y = y;
+		_generalMatrix.rotateY = glm::rotate(glm::mat4(1.0f), glm::radians(y), glm::vec3(0.0f, 1.0f, 0.0f));
+		_model.meshes[indexMesh]->SetRotationY(y);
+
+		UpdateMatrix();
+		//UpdateTransformsData();
+	}
+
+	void Model::SetMeshRotZ(float z, int indexMesh) {
+		_transform.rotation.z = z;
+		_generalMatrix.rotateZ = glm::rotate(glm::mat4(1.0f), glm::radians(z), glm::vec3(0.0f, 0.0f, 1.0f));
+		_model.meshes[indexMesh]->SetRotationZ(z);
+
+		UpdateMatrix();
+		//UpdateTransformsData();
+	}
+
 	void Model::ScaleModel(float x, float y, float z) 
 	{
 		for (int i = 0; i < _model.meshes.size(); i++)

@@ -77,8 +77,15 @@ namespace Engine
 		Mesh* GetParent();
 		void AddMeshSon(Mesh* newChildren);
 		void SetPos(vec3 pos);
+		void SetRotX(float x);
+		void SetRotY(float y);
+		void SetRotZ(float z);
+
 		void Scale(float x, float y, float z);
 		void UpdateSonPos();
+		void UpdateSonsRotX();
+		void UpdateSonsRotY();
+		void UpdateSonsRotZ();
 		void UpdateSonScale();
 
 		void Draw();
